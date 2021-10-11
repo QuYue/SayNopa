@@ -5,7 +5,7 @@
 @Time    :   2021/10/11 15:21:10
 @Author  :   QuYue 
 @Email   :   quyue1541@gmail.com
-@Desc    :   client.
+@Desc    :   Client.
 '''
 #%% Import Packages
 import requests
