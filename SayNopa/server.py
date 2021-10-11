@@ -53,7 +53,7 @@ def diagnose():
     else:
         message = '未接收到文件'
     end_time = time.time()
-    print(f'{message}\n用时{end_time-start_time :.2f}s')
+    print(f'{message} 用时{end_time-start_time :.2f}s')
     end_time = time.time()
     return message
 
