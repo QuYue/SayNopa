@@ -52,6 +52,7 @@ def diagnose():
             message = '文件保存出错'
     else:
         message = '未接收到文件'
+    end_time = time.time()
     print(f'{message}\n用时{end_time-start_time :.2f}s')
     end_time = time.time()
     return message
