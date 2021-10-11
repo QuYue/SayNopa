@@ -41,17 +41,17 @@ def diagnose():
     received_file = request.files['file']
     image_name = received_file.filename
     if received_file:
-        received_dirPath = './resources/received_images'
+        received_dirPath = './resources/received_file'
         if not os.path.isdir(received_dirPath):
             os.makedirs(received_dirPath)
         image_path = os.path.join(received_dirPath, image_name)
         try:
             received_file.save(image_path)
-            message = f'图片保存到{image_path}'
+            message = f'文件保存到{image_path}'
         except:
-            message = '图片保存出错'
+            message = '文件保存出错'
     else:
-        message = '未接收到图片'
+        message = '未接收到文件'
     print(message)
     end_time = time.time()
     return f'{message}\n用时{end_time-start_time :.2f}s'

@@ -36,7 +36,7 @@ if __name__ == '__main__':
         print(f"\r连接成功，延迟：{end_time-start_time :.2}s, 与服务端时钟差：{connect_result.json()['TimeDelay'] :.2}s\n", flush=True)
 
         while True:
-            input_content = input("输入图片路径，输入'exit'退出：")
+            input_content = input("输入文件路径，输入'exit'退出：")
             input_content = input_content.strip()
             if input_content == '':
                 continue
