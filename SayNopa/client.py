@@ -41,12 +41,21 @@ if __name__ == '__main__':
             if input_content == '':
                 continue
             elif input_content == 'exit':
-                print('退出客户端')
+                print('> 退出客户端')
                 break
             else:
-                image_path = input_content
-                image_name = os.path.split(image_path)[-1]
-                file_message = {'file':(image_name, open(image_path, 'rb'), 'image/jpeg')}
-                result = requests.post(url, files=file_message)
-                print(result.text)
-                print()
+                file_path = input_content
+                file_name = os.path.split(file_path)[-1]
+                try:
+                    file_message = {'file':(file_name, open(file_path, 'rb'), 'image/jpeg')}
+                except:
+                    print('> 读取文件错误')
+                    continue
+                start_time = time.time()
+                try:
+                    result = requests.post(url, files=file_message)
+                except:
+                    print('> 上传文件失败')
+                    continue
+                end_time = time.time()
+                print('> '+result.text+f'\n> 用时{end_time-start_time :.2f}s')
