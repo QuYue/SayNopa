@@ -1,0 +1,61 @@
+/**index.wxss**/
+
+Page {
+  /* text-align: center; *居中* */
+}
+
+.title {
+  color: black;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 50px;
+  font-size: 20px;
+  padding: 10px;
+}
+
+.bg {
+  margin-left: 20%; 
+  margin-right: 20%;
+}
+.bg image {
+ width: 100%
+}
+
+.comment {
+  margin-top: 5%;
+  text-align: center;
+  font-size: 14px;
+  color: #999;
+}
+.comment1 {
+  margin-top: 10%;
+  margin-bottom: 0%;
+  text-align: center;
+  font-size: 14px;
+  color: #999;
+}
+.comment_red {
+  margin-top: 5%;
+  text-align: center;
+  font-size: 14px;
+  color: red;
+}
+.comment_green {
+  margin-top: 5%;
+  text-align: center;
+  font-size: 14px;
+  color: green;
+}
+/*  
+.body {
+  padding: 30px;
+} */
+
+.button1 {
+  margin-top: 5%;
+}
+
+.button2 {
+  margin-top: 2%;
+  background-color: rgb(132, 232, 245);
+}

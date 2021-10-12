@@ -1,0 +1,19 @@
+<!--index.wxml-->
+<!-- <view class="title"> hello {{wording}}!</view>
+<view class="title"> connect {{out}}!</view> -->
+<view class="bg">
+<image mode="widthFix" src="../../img/login/logo.png"></image>
+</view>
+
+
+<view class="title">ipv6服务器测试连接</view>
+
+<view class="body">
+    <button bindtap="onClick" class='button1'>测试</button>
+    <view class="{{className}}"> {{out}}</view> 
+</view>
+
+<!-- <view class="body">
+    <view class="comment1"> 若连接成功则可以进入程序</view> 
+    <button class='button2'>进入程序</button>
+</view> -->
