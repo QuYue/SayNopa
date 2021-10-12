@@ -1,0 +1,1 @@
+crt文件和key文件放置于/etc/ssl/中
