@@ -5,18 +5,18 @@
 @Time    :   2021/10/11 15:21:10
 @Author  :   QuYue 
 @Email   :   quyue1541@gmail.com
-@Desc    :   Client. 
+@Desc    :   Run the client (shell). 
 '''
 #%% Import Packages
-import requests
-import time
 import os
+import time
 import json
+import requests
 
-# %%
+#%%
 if __name__ == '__main__':
-    url_c = r'http://pd.goldminer.top:8000/connect'
-    url = r'http://pd.goldminer.top:8000/diagnose'
+    url_c = r'http://pd.goldminer.top:5000/connect'
+    url = r'http://pd.goldminer.top:5000/diagnose'
     
     print("""SayNopa Client -- Version 0.0
 本产品的版权归大连理工大学Goldminer实验室所有，
