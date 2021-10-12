@@ -5,7 +5,6 @@
 <image mode="widthFix" src="../../img/login/logo.png"></image>
 </view>
 
-
 <view class="title">ipv6服务器测试连接</view>
 
 <view class="body">
