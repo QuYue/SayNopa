@@ -1,0 +1,19 @@
+<!--index.wxml-->
+<view class='user'>用户 {{name}}</view>
+
+
+<!-- <input id="myInput" bindchange="bindChange" />
+<checkbox id="myCheckbox" bindchange="bindChange" /> -->
+
+<view class="container" class="zn-uploadimg">
+ <button bindtap="{{myclick}}" class='login'>{{log}}</button>
+ <!-- <button  bindtap="modalinput">信息修改</button> -->
+ <view class='remind'> {{out_in}}</view>
+ </view>
+
+ <modal id="modal" hidden="{{hiddenmodalput}}" title="修改信息" confirm-text="提交" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm">
+ <input type='text' placeholder="姓名：" bindinput="usernameInput" auto-focus/>
+ </modal>
+
+
+

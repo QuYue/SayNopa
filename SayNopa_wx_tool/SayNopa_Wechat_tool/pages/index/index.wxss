@@ -8,7 +8,7 @@ Page {
   color: black;
   font-weight: bold;
   text-align: center;
-  margin-top: 50px;
+  margin-top: 5%;
   font-size: 20px;
   padding: 10px;
 }
@@ -46,16 +46,18 @@ Page {
   font-size: 14px;
   color: green;
 }
-/*  
-.body {
-  padding: 30px;
-} */
 
 .button1 {
   margin-top: 5%;
 }
 
-.button2 {
+.button2_0 {
+  margin-top: 2%;
+  color:gray;
+}
+
+.button2_1 {
   margin-top: 2%;
   background-color: rgb(132, 232, 245);
 }
+

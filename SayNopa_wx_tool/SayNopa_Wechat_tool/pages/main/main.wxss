@@ -1,0 +1,20 @@
+/**index.wxss**/
+
+Page {
+  /* text-align: center; *居中* */
+}
+.user {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.login {
+  background-color: rgb(132, 232, 245);
+}
+
+.remind {
+  text-align: center;
+  color: red;
+  font-size: 10px;
+}
+

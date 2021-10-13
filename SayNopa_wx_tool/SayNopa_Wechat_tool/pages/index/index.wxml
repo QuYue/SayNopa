@@ -5,6 +5,7 @@
 <image mode="widthFix" src="../../img/login/logo.png"></image>
 </view>
 
+<view class="comment">本服务基于纯ipv6环境</view>
 <view class="title">ipv6服务器测试连接</view>
 
 <view class="body">
@@ -12,7 +13,7 @@
     <view class="{{className}}"> {{out}}</view> 
 </view>
 
-<!-- <view class="body">
+<view class="body">
     <view class="comment1"> 若连接成功则可以进入程序</view> 
-    <button class='button2'>进入程序</button>
-</view> -->
+    <button bindtap="onClick2" class="{{button2}}">进入程序</button>
+</view>

@@ -5,6 +5,7 @@ var url_c = "https://pd.goldminer.top:8000/connect"
 var out = 0
 var f = 0
 var now = gettime()
+var status = 'none'
 
 function gettime() {
   var d = new Date();
@@ -17,10 +18,10 @@ function changered() {
 Page({
   data: {
     out: '未连接',
-    className: 'comment'
+    className: 'comment',
+    button2: 'button2_0',
   },
 
-  
   onClick: function() {
     const that = this;
     now = gettime();
@@ -32,14 +33,27 @@ Page({
       },
       success (res){
         if (res.statusCode==200) {
+          status = 'connect';
           var delay = gettime() - now;
-          that.setData({out: "连接成功 延迟"+delay.toFixed(3)+"s", className: 'comment_green'});
+          that.setData({out: "连接成功 延迟"+delay.toFixed(3)+"s", className: 'comment_green', button2: 'button2_1'});
         }
         else
-        {
-          that.setData({out: '连接失败',  className: 'comment_red'});
+        { status = 'unconnect';
+          that.setData({out: '连接失败',  className: 'comment_red', button2: 'button2_0'});
         }
       }
     })
+  },
+
+  onClick2: function() {
+    const that = this;
+    if (status == 'connect') {
+      wx.navigateTo({
+        url: '/pages/main/main'
+      })
+    }
   }
+
+
+
 })
