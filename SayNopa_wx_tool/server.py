@@ -41,7 +41,6 @@ def connect():
     receive_time_d = time.strftime('%Y年%m月%d日 %H时%M分%S秒', time.localtime(time.time()))
     send_time = float(data['send_time'])
     print(f'于{time_in_detail(receive_time)}连接成功')
-    
     return json.dumps({'status': 'success', 'TimeDelay':receive_time-send_time, 'receive_time': receive_time})
 
 @app.route('/connect2', methods=['POST'])
@@ -73,6 +72,19 @@ def connect2():
             result = [0, {'error':True, 'open_id':open_id}]
     return json.dumps(result[1])
 
+@app.route('/alter_username', methods=['POST'])
+def alter_username():
+    data = request.get_json()
+    if data:
+        pass
+    else:
+        data = request.get_data()
+        data = json.loads(data)
+    open_id = data['open_id'][1:-1]
+    user_name = data['user_name'][1:-1]
+    result = mc.alter_username_openid(open_id, user_name)
+    return json.dumps(result)
+
 
 @app.route('/diagnose', methods=['POST'])
 def diagnose():
@@ -95,6 +107,7 @@ def diagnose():
     print(f'{message} 用时{end_time-start_time :.2f}s')
     end_time = time.time()
     return message
+
 
 
 if __name__ == '__main__':
