@@ -1,7 +1,7 @@
 // index.js
 // 获取应用实例
 const app = getApp()
-var url_c = "https://pd.goldminer.top:8000/connect"
+var url_c = "https://nopa.datahys.com:8000/connect"
 var out = 0
 var f = 0
 var now = gettime()

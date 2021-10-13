@@ -1,8 +1,8 @@
 // index.js
 // 获取应用实例
 const app = getApp()
-var url_c = "https://pd.goldminer.top:8000/connect2"
-var url_a = "https://pd.goldminer.top:8000/alter_username"
+var url_c = "https://nopa.datahys.com:8000/connect2"
+var url_a = "https://nopa.datahys.com:8000/alter_username"
 
 Page({
   data: {
@@ -46,6 +46,7 @@ Page({
             }
             else
             {user_name= '未登录' };
+            console.log(res.data.error)
             that.setData({name: user_name, out_in:''})
           }
         })

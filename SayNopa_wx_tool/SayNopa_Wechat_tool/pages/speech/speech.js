@@ -10,7 +10,7 @@ let contentHeight = ((windowHeight / screenWidth) * 750 - 184 - 166) + "rpx";
 const recorderManager = wx.getRecorderManager()
 const backgroundAudioManager = wx.getBackgroundAudioManager()
 
-var url_s = "https://pd.goldminer.top:8000/speech"
+var url_s = "https://nopa.datahys.com:8000/speech"
 
 Page({
  /*** 页面的初始数据*/
@@ -162,7 +162,7 @@ Page({
         let that = this
         this.setData({uploadState:true})
         wx.uploadFile({
-            url: url_s,
+            url: url_s+'/'+that.data.open_id,
             filePath: this.data.tempFilePath,
             name: 'file',
             header:{
