@@ -44,7 +44,7 @@ class mysql_connecter():
         self.execute(sql)
         results= self.cursor.fetchall()
         if len(results) == 0:
-            user = None
+            user = dict()
             status = 'new'
         else:
             user = {'user_id':results[0][0], 'open_id': results[0][1], 'user_name': results[0][2]}

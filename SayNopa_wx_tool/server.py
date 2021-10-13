@@ -59,6 +59,7 @@ def connect2():
     data = json.loads(response.content)
     open_id = data['openid']
     result = mc.find_user_openid(open_id)
+    print(result)
     if result[0] == 'exist':
         result[1]['ifnew'] = False
         result[1]['error'] = False
