@@ -149,5 +149,5 @@ if __name__ == '__main__':
 本产品的版权归大连理工大学Goldminer实验室所有，
 欢迎使用不帕服务端。
     """)
-    app.run(host='::',port=5000,debug=True)
+    app.run(host='::', port=5000, debug=True)
 # %%

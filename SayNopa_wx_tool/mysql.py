@@ -8,7 +8,6 @@
 @Desc    :   
 '''
 #%%
-from typing import NewType
 import pymysql
 import pandas as pd
 import datetime
