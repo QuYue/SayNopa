@@ -17,10 +17,10 @@
 
 
 <view class='option'>
-    <button class='button_c'><image mode='widthFix'  src='../../img/main/nopa_speech.png'></image><view>语音诊断</view></button>
+    <button class='button_c' bindtap="speech"><image mode='widthFix'  src='../../img/main/nopa_speech.png'></image><view>语音诊断</view></button>
 </view>
 <view class='option'>
-    <button class='button_c'><image mode='widthFix'  src='../../img/main/nopa_face.png'></image><view>面部诊断</view></button>
+    <button class='button_c' bindtap="face"><image mode='widthFix'  src='../../img/main/nopa_face.png'></image><view>面部诊断</view></button>
 </view>
 
 

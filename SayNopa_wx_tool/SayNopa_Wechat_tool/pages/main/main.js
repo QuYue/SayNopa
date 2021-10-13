@@ -46,7 +46,7 @@ Page({
             }
             else
             {user_name= '未登录' };
-            that.setData({name: user_name})
+            that.setData({name: user_name, out_in:''})
           }
         })
       }
@@ -81,7 +81,6 @@ Page({
         open_id: JSON.stringify(that.data.open_id),
       },
       success: function (res) {
-        console.log(res.data.status)  
         if (res.data.status == 'success'){
         that.setData({name:that.data.username, out_in: ''})
         }
@@ -93,7 +92,6 @@ Page({
       }
     })
   }
-  // this.setData({name:this.data.username, out_in:''});}
   },
 
   usernameInput:function(e){
@@ -101,8 +99,38 @@ Page({
     this.setData({
       username: content,
     })
-
   },
+
+  speech: function() {
+    const that = this;
+    if (this.data.open_id != '') {
+      wx.navigateTo({
+        url: "../speech/speech?user_name="+that.data.name+"&open_id="+that.data.open_id,
+        // success: function(res) {
+        //   // 通过eventChannel向被打开页面传送数据
+        //   // res.eventChannel.emit('acceptDataFromOpenerPage', { ttt: 'test' })
+        // }
+      });
+      // console.log(app.userInfo.open_id);
+      // app.userInfo = {
+      //   open_id: this.data.open_id,
+      //   user_name: this.data.name,
+      //   };
+      // console.log(app.userInfo.open_id);
+    }
+    else
+    {this.setData({out_in: '请先登录'})}
+  },
+
+  face: function() {
+    if (this.data.open_id != '') {
+      wx.navigateTo({
+        url: "../face/face"
+      })
+    }
+    else
+    {this.setData({out_in: '请先登录'})}
+  }
 })
 
 

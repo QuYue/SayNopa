@@ -49,10 +49,11 @@ Page({
     const that = this;
     if (status == 'connect') {
       wx.navigateTo({
-        url: '/pages/main/main'
+        url: '../main/main'
       })
     }
   }
+  
 
 
 
