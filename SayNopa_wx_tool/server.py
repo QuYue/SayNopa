@@ -11,10 +11,13 @@
 import os
 import time
 import json
+import requests
 from flask import Flask, request, render_template, jsonify
+import mysql
 
 #%%
 app = Flask(__name__)
+mc = mysql.mysql_connecter()
 # 设置开启web服务后，如果更新html文件，可以使更新立即生效
 # app.jinjia_env.auto_reload = True
 # app.config['TEMPLATES_AUTO_RELOAD'] = True
@@ -40,6 +43,36 @@ def connect():
     print(f'于{time_in_detail(receive_time)}连接成功')
     
     return json.dumps({'status': 'success', 'TimeDelay':receive_time-send_time, 'receive_time': receive_time})
+
+@app.route('/connect2', methods=['POST'])
+def connect2():
+    data = request.get_json()
+    if data:
+        pass
+    else:
+        data = request.get_data()
+        data = json.loads(data)
+    print(data)
+    receive_time = time.time()
+    get = data['get']
+    get = get[1:-1]
+    response = requests.get(get)
+    data = json.loads(response.content)
+    open_id = data['openid']
+    result = mc.find_user_openid(open_id)
+    if result[0] == 'exist':
+        result[1]['ifnew'] = False
+        result[1]['error'] = False
+    else:
+        result[1]['ifnew'] = True
+        d = mc.add_user_openid(open_id)
+        if d == 'success':
+            result = mc.find_user_openid(open_id)
+            result[1]['error'] = False
+        else:
+            result = [0, {'error':True, 'open_id':open_id}]
+    return json.dumps(result[1])
+
 
 @app.route('/diagnose', methods=['POST'])
 def diagnose():
