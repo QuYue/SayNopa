@@ -82,7 +82,12 @@ def alter_username():
         data = json.loads(data)
     open_id = data['open_id'][1:-1]
     user_name = data['user_name'][1:-1]
-    result = mc.alter_username_openid(open_id, user_name)
+    user_name = user_name.strip()
+    if len(user_name) == 0:
+        result = {'status': 'empty'}
+    else:
+        result = mc.alter_username_openid(open_id, user_name)
+        result['user_name'] = user_name
     return json.dumps(result)
 
 
