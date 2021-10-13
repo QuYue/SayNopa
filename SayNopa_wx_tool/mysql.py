@@ -65,6 +65,20 @@ class mysql_connecter():
             d = 'exist'
         return d
 
+    def alter_username_openid(self, open_id, user_name):
+        if self.find_user_openid(open_id)[0] == 'new':
+            d = {'status':'error'}
+        else:
+            sql = "update user_table set user_name = '{}' where open_id='{}'" .format(str(user_name), str(open_id))
+            try:
+                self.execute(sql)
+                self.commit()
+                d = {'status':'success'}
+            except:
+                self.rollback()
+                d = {'status':'error'}
+        return d
+            
     def clear_table(self, table):
         sql = 'truncate table {}'.format(str(table))
         self.execute(sql)
