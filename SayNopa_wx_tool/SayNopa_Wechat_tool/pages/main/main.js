@@ -2,6 +2,7 @@
 // 获取应用实例
 const app = getApp()
 var url_c = "https://pd.goldminer.top:8000/connect2"
+var url_a = "https://pd.goldminer.top:8000/alter_username"
 
 Page({
   data: {
@@ -12,7 +13,8 @@ Page({
     hiddenmodalput: true,
     myclick: 'onClick',
     log: '登录',
-    out_in:''
+    out_in:'',
+    open_id : ''
   },
   
   onClick: function() {
@@ -40,7 +42,7 @@ Page({
               else
               {user_name = res.data.user_name};
               console.log(user_name);
-              that.setData({myclick: 'modalinput', log: '信息修改'});
+              that.setData({myclick: 'modalinput', log: '信息修改', open_id: res.data.open_id});
             }
             else
             {user_name= '未登录' };
@@ -64,15 +66,34 @@ Page({
      
   //确认
   confirm: function () {
+  const that = this;
   this.setData({
   hiddenmodalput: true
   });
   if (this.data.username == undefined)
   {this.setData({out_in: '输入为空'})}
   else
-  {
-  console.log(this.data.username);
-  this.setData({name:this.data.username, out_in:''});}
+  { wx.request({
+      url: url_a,
+      method: "POST",
+      data: {
+        user_name: JSON.stringify(that.data.username),
+        open_id: JSON.stringify(that.data.open_id),
+      },
+      success: function (res) {
+        console.log(res.data.status)  
+        if (res.data.status == 'success'){
+        that.setData({name:that.data.username, out_in: ''})
+        }
+        else if (res.data.status == 'empty'){
+          that.setData({out_in: '输入不能只有空格'})
+          }
+        else
+        {that.setData({out_in: '发生错误'})}
+      }
+    })
+  }
+  // this.setData({name:this.data.username, out_in:''});}
   },
 
   usernameInput:function(e){
