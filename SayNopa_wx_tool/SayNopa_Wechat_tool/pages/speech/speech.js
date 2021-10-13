@@ -17,6 +17,7 @@ Page({
     data: {
         user_name: '',
         open_id: '',
+        start_text: '开始',
         startClick:false,
         contentHeight: contentHeight,
         voiceState:false,
@@ -94,12 +95,13 @@ Page({
             return
             }
         this.data.startClick = true
+        this.setData({start_text:'录音中'})
         const options = {
             duration: 10000,
             sampleRate: 44100,
             numberOfChannels: 1,
             encodeBitRate: 192000,
-            format: 'aac',
+            format: 'm4a',
             frameSize: 50
         }
         // 开始倒计时
@@ -110,7 +112,7 @@ Page({
 
     shutRecord:function(){
         recorderManager.stop()
-        this.setData({showhandle1:false,showhandle2:true,currentTime:'00'})
+        this.setData({showhandle1:false,showhandle2:true,currentTime:'00',start_text:'开始'})
     },
 
     listenRecord:function(e){

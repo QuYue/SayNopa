@@ -1,292 +1,75 @@
-/* pages/face/face.wxss */
-.servicePage {
-    font-family: "PingFangSC-Regular";
-   }
-   .top {
-    font-size: 34rpx;
-    font-family: "PingFangSC-Medium";
-    color: #fff;
-    padding-left: 60rpx;
-    display: flex;
-    align-items: center;
-    height: 150rpx;
-   }
-   .content {
-    border-radius: 36rpx 36rpx 0 0;
-    background: #fff;
-    padding: 16rpx 30rpx;
-    overflow-y: scroll;
-   }
-   .allService .title {
-    text-align:center;
-   }
-   .serviceList {
-    margin-top:300rpx;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 16rpx;
-   }
-   .handleView{
-    margin-top:300rpx;
-    display: flex;
-    /* align-items: center; */
-    justify-content: center;
-    /* justify-content: space-between; */
-    padding:0 100rpx;
-   }
-   .CircleBtn{
-    width:100rpx;
-    height:100rpx;
-    color:#fff;
-    text-align:center;
-    line-height:100rpx;
-    border-radius:50%;
-    font-size:28rpx;
-   }
-   .green{
-    background-color:#3ed3ca;
-   }
-   .red{
-    background-color:red;
-   }
-   .blue{
-    background-color: blue;
-   }
-   .voiceLine{
-    position: relative;
-    background: #eee;
-    height:40px;
-    padding:0 10rpx;
-    overflow: hidden;
-   }
-   .voicePointer{
-    width:2rpx;
-    height:100rpx;
-    background: cornflowerblue;
-    position: absolute;
-    top:0;
-    left:10rpx;
-   }
-   .voiceBox{
-    display: flex;
-    align-items: center;
-    height:40px;
-   }
-   .line1{
-    height:1px;
-    background: cornflowerblue;
-    width:100rpx;
-   }
-   .Wave2{
-    height:40px;
-   }
-   .Wave3{
-    height:40px;
-   }
-   .voiceWave{
-    display: flex;
-    align-items: flex-end;
-    height:20px;
-   }
-   .voiceWave1{
-    display: flex;
-    align-items:flex-start;
-    height:20px;
-   }
-   .auItem{
-    width:1px;
-    margin-right:4rpx;
-    background: cornflowerblue;
-    height:2px;
-   }
-   .au1{
-    height:8px;
-    animation: audio1 1s linear .1s infinite ;
-   }
-   .au2{
-    height:6px;
-    animation: audio2 1s linear .1s infinite ;
-   }
-   .au3{
-    height:4px;
-    animation: audio3 1s linear .1s infinite ;
-   }
-   .au4{
-    height:8px;
-    animation: audio4 .5s linear .2s infinite ;
-   }
-   .au5{
-    height:6px;
-    animation: audio5 .5s linear .5s infinite ;
-   }
-   .au6{
-    height:4px;
-    animation: audio6 .5s linear .2s infinite ;
-   }
-   @keyframes audio1 {
-    from{height:8px;}
-    to{height:6px;}
-   }
-   @keyframes audio2 {
-    from{height:6px;}
-    to{height:4px;}
-   }
-   @keyframes audio3 {
-    from{height:4px;}
-    to{height:2px;}
-   }
-   @keyframes audio4 {
-    from{height:6px;}
-    to{height:8px;}
-   }
-   @keyframes audio5 {
-    from{height:4px;}
-    to{height:6px;}
-   }
-   @keyframes audio6 {
-    from{height:2px;}
-    to{height:4px;}
-   }
-   .serviceList .box {
-    width: 200rpx;
-    height: 220rpx;
-    background: #eee;
-    padding: 4rpx;
-    border-radius: 8rpx;
-   }
-   .serviceList .box view.free{
-    position: absolute;
-    left:-10rpx;
-    top:0;
-    width:108rpx;
-    height:42rpx;
-    line-height: 42rpx !important;
-    padding:0;
-   }
-   .serviceList .box view.free text{
-    display: inline-block;
-    color:#fff;
-    position: absolute;
-    font-size: 24rpx;
-    text-align: center;
-    width:108rpx;
-    top:-4rpx;
-   }
-   .box .free image{
-    width:108rpx;
-    height:42rpx;
-   }
-   .serviceList .box view:first-child {
-    height: 80rpx;
-    line-height: 80rpx;
-    font-size: 30rpx;
-    text-align: center;
-   }
-   .serviceList .box view:last-child {
-    font-family: "PingFangSC-Semibold";
-    border-radius: 0 0 8rpx 8rpx;
-    height: 140rpx;
-    background: #fff;
-    font-size: 72rpx;
-    text-align: center;
-    line-height: 135rpx;
-    vertical-align: top;
-    position: relative;
-   }
-   .serviceList .box view:last-child text {
-    font-size: 26rpx;
-   }
-   .box.active {
-    background: #ffd458;
-   }
-   .box.active view:last-child {
-    background: #fffbea;
-   }
-   .bottom {
-    position: fixed;
-    width: 100%;
-    height: 184rpx;
-    background: #fff;
-    box-shadow: 0 -2px 5px 0 rgba(0, 0, 0, 0.10);
-    bottom: 0;
-    left: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-sizing: border-box;
-    padding: 0 30rpx 60rpx 30rpx;
-   }
-   .bottom .left view.all {
-    font-size: 34rpx;
-    font-family: "PingFangSC-Semibold";
-    line-height: 48rpx;
-    display: flex;
-    align-items: center;
-    margin-bottom: 10rpx;
-   }
-   .bottom .left view.agree {
-    font-size: 24rpx;
-    display: flex;
-    align-items: center;
-   }
-   .bottom .left view.agree text {
-    color: #bbb;
-   }
-   .bottom .left view text.colorBlue {
-    color: #419bf9;
-   }
-   .bottom .right {
-    width: 200rpx;
-    background: #3ed3ca;
-    border-radius: 40rpx;
-    line-height: 80rpx;
-    text-align: center;
-    font-size: 30rpx;
-    color: #fff;
-   }
-   .rightsInfo {
-    margin-top: 60rpx;
-    padding-right: 16rpx;
-   }
-   .rightsInfo::before {
-    display: table;
-    content: '';
-   }
-   .rightsInfo .title {
-    font-size: 32rpx;
-    display: flex;
-    align-items: center;
-    letter-spacing: 0.26px;
-   }
-   .rightsInfo .title image {
-    width: 40rpx;
-    height: 40rpx;
-    margin-right: 14rpx;
-   }
-   .rightsInfo .rightsList {
-    display: flex;
-    align-items: center;
-    margin-top: 40rpx;
-   }
-   .rightsInfo .rightsList .left {
-    width: 80rpx;
-    height: 80rpx;
-    margin-right: 20rpx;
-   }
-   .rightsInfo .rightsList .left image {
-    width: 80rpx;
-    height: 80rpx;
-   }
-   .rightsInfo .rightsList .right .rightTitle {
-    font-family: "PingFangSC-Medium";
-    font-size: 30rpx;
-    color: #333;
-    letter-spacing: 0.24px;
-    line-height: 24px;
-   }
-   .rightsInfo .rightsList .right .rightDes {
-    font-size: 24rpx;
-    color: #a5a5a5;
-    letter-spacing: 0;
-   }
-   
+page{
+  height: 100%;
+}
+.view{
+  width: 100%;
+  height: 90%;
+  /* background-color: yellow; */
+}
+ 
+.btn_all{
+  color: white;
+  border-radius: 10px;
+  display: block;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 10%;
+  margin-top:8%
+}
+
+.btn_open{
+  width: 40%;
+  float: left;
+  margin-left: 5%;
+}
+.btn_close{
+  width: 40%;
+  margin-right: 5%;
+  float: right;
+}
+.image{
+  width: 100%;
+  height: 100%;
+  /* border:2rpx solid; */
+  top:0rpx;
+}
+.face_pos{
+  width: 100%;
+  height: 0%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align:center; 
+  font-weight:700;
+  font-size: 14px;
+  margin-top: 5%;
+}
+
+.window{
+  width: 100%;
+  height: 85%;
+  margin-top: 5%;
+  /* background-color:red; */
+}
+
+.camera{
+  width: 100%;
+  height: 100%;
+  /* top:-100%; */
+  top: -100%;
+  /* z-index: -1; */
+}
+button{
+  margin: 0 10rpx;
+  width: 100%;
+}
+.myCanvas{
+  width: 99%;
+  height:100%;
+  border: 1px solid red;
+}
+ 

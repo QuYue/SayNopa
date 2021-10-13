@@ -1,204 +1,167 @@
-// pages/face/face.js
-let windowHeight = wx.getSystemInfoSync().windowHeight // 屏幕的高度
-let screenWidth = wx.getSystemInfoSync().screenWidth
-let screenHeight = wx.getSystemInfoSync().screenHeight
-let contentHeight = ((windowHeight / screenWidth) * 750 - 184 - 166) + "rpx";
-const recorderManager = wx.getRecorderManager()
-const backgroundAudioManager = wx.getBackgroundAudioManager()
-
-var url_s = "https://nopa.datahys.com:8000/speech"
-
-Page({
- /**
-  * 页面的初始数据
-  */
- data: {
-  startClick:false,
-  contentHeight: contentHeight,
-  voiceState:false,
-  tempFilePath:'',
-  recordingTimeqwe:0,//录音计时
-  setInter:"",//录音名称
-  isplay:true, //播放状态 true--播放中 false--暂停播放
-  uploadState:false,
-  showhandle1:true,
-  showhandle2:false,
-  showWaveView:false,
-  currentLeft:10,
-  currentTime:'00'
- },
- /**
-  * 生命周期函数--监听页面加载
-  */
- onLoad: function (options) {
-  this.initRecord()
- },
- /**
-  * 生命周期函数--监听页面初次渲染完成
-  */
- onReady: function () {
- },
- initRecord:function(){
-  recorderManager.onStart(() => {
-   console.log('开始录音')
-  })
-  recorderManager.onPause(() => {
-   console.log('暂停录音')
-  })
-  recorderManager.onStop((res) => {
-   clearInterval(this.data.setInter);
-   this.setData({voiceState:true,currentLeft:10})
-   console.log('结束录音', res)
-   const { tempFilePath } = res
-   this.data.tempFilePath = tempFilePath
-  })
-  recorderManager.onFrameRecorded((res) => {
-   const { frameBuffer } = res
-   console.log('frameBuffer.byteLength', frameBuffer.byteLength)
-  })
- },
- recordingTimer:function(){
-  var that = this;
-  //将计时器赋值给setInter
-  this.data.setInter = setInterval(
-   function () {
-    let time = that.data.recordingTimeqwe + 1;
-    if(time>10){
-     wx.showToast({
-      title: '录音时长最多10s',
-      duration:1500,
-      mask:true
-     })
-     clearInterval(that.data.setInter);
-     that.shutRecord();
-     return;
+//index.js
+//获取应用实例
+var that
+var animation = wx.createAnimation({
+  duration: 300,
+    timingFunction: 'ease',
+})
+/**
+ * [倒计时函数，有放大动画效果]
+ * @param  {Number} minutes         [分钟]
+ * @param  {Number} second          [秒]
+ * @param  {function} TimeoutCallback [倒计时结束执行的函数]
+ */
+function countDown(minutes, second, TimeoutCallback)  {
+    var interval = () => {
+      if (minutes > 0 && second >= 0 || second > 10){
+        animation.scale(1.5,1.5).step()
+        animation.scale(1,1).step()
+        that.setData({
+          time: minutes + ':' + second--,
+          animationData:animation.export()
+        })
+      }else if (minutes > 0){
+        minutes--;
+        second = 59;
+        animation.scale(1.5,1.5).step()
+        animation.scale(1,1).step()
+        that.setData({
+          time: minutes + ':' + second--,
+          animationData:animation.export()
+        })
+      }else if (second >= 0){
+        animation.scale(1.5,1.5).step()
+        animation.scale(1,1).step()
+        that.setData({
+          time: second--,
+          animationData:animation.export()
+        })
+      }else{
+        clearInterval(timer)
+        // 倒计时结束回调
+        if (typeof TimeoutCallback !== 'function'){
+          return 
+        }
+        TimeoutCallback()
+      }           
     }
-    // console.log(time);
-    let currentTime = time < 10 ? '0'+time : time;
-    that.setData({
-     recordingTimeqwe: time,
-     currentTime:currentTime,
-     currentLeft:that.data.currentLeft + 65
+    // 因为定时器会延时一个间隔单位，所以先执行一次
+    interval()    
+    var timer = setInterval(interval,1000)
+           
+}
+function myStopFunction() { 
+}
+  
+//
+var time = null;
+var myCanvas = null;
+var windowHeight, windowWidth;
+var type = null;
+Page({
+  data: {
+    device:true,
+    camera: true,
+    x1: '未收集',
+    x2:'none'
+  },
+
+  onLoad() {
+    this.setData({
+      ctx: wx.createCameraContext(),
+      device: this.data.device,
     })
-   }
-   , 1000); 
- },
- startRecord:function(){
-  if(this.data.startClick){
-   return
+    wx.getSystemInfo({
+      success: function (res) {
+        console.log(res);
+        // 屏幕宽度、高度
+        windowHeight = res.windowHeight;
+        windowWidth = res.windowWidth;
+        console.log('height=' + res.windowHeight);
+        console.log('width=' + res.windowWidth);
+      }
+    })
+  },
+  onLoad: function(){
+    that = this
+    countDown(0,25)
+  },
+  onUnload: function () {
+    myStopFunction()
+    
+    
+    
+
+  },
+  
+  open() {
+    this.setData({
+      camera: true
+    })
+    type = "takeRecord";
+    let ctx = wx.createCameraContext(this)
+    let that = this
+    if (type == "takeRecord") {
+      console.log("begin takeRecord")
+      that.setData({
+        x1:'采集中'
+       })
+       
+      ctx.startRecord({
+        success:(res) =>{
+          console.log('startRecord')
+        }    
+      })
+      //
+     
+    }
+  
+  },
+  // 关闭模拟的相机界面
+  close() {
+    console.log("关闭相机");
+    type = "endRecord" 
+    let ctx = wx.createCameraContext(this)
+    let that = this
+    if (type="endRecord" ){
+      that.setData({
+        x1:'收集完毕，诊断中'
+      })
+      ctx.stopRecord({
+        success:(res) =>{
+          console.log(res.tempVideoPath)
+          var tempVideoPath=res.tempVideoPath
+          wx.uploadFile({
+            url: 'http://10.5.73.10:5000//upload',
+            filePath: tempVideoPath,
+            name: 'file',
+            header:{"Content-type":"multipart/form-data"},
+            success:function(res){
+              var im_path = res.data
+              console.log(im_path)
+              wx.request({
+                url: 'http://10.5.73.10:5000//inference',
+                method: "GET",
+                header: {"Content-type":"application/json"},
+                success:function(res){
+                  var content=res.data
+                  console.log(content)
+                 that.setData({
+                  x2:content
+                 })
+                }
+              })
+            }
+          })
+        }    
+      })
+    }
+    
   }
-  this.data.startClick = true
-  const options = {
-   duration: 10000,
-   sampleRate: 44100,
-   numberOfChannels: 1,
-   encodeBitRate: 192000,
-   format: 'aac',
-   frameSize: 50
-  }
-  // 开始倒计时
-  this.recordingTimer()
-  // 开始录音
-  recorderManager.start(options)
- },
- shutRecord:function(){
-  recorderManager.stop()
-  this.setData({showhandle1:false,showhandle2:true,currentTime:'00'})
- },
- listenRecord:function(e){
-  // 试听
-  let isplay = e.currentTarget.dataset.isplay;
-  backgroundAudioManager.title = '试听欢迎语'
-  backgroundAudioManager.src = this.data.tempFilePath
-  this.setData({
-   showWaveView:true,
-   currentLeft:10,
-   currentTime:'00'
-  })
-  backgroundAudioManager.onPlay(() => {
-   console.log("音乐播放开始")
-  })
-  backgroundAudioManager.onEnded(() => {
-   console.log("音乐播放结束")
-   clearInterval(this.data.setInter1)
-   this.setData({currentLeft:10,showWaveView:false,currentTime:'00'})
-  })
-  backgroundAudioManager.play()
-  this.data.setInter1 = setInterval(() => {
-   let time = parseInt(this.data.currentTime) + 1
-   let currentTime = time < 10 ? '0'+time : time;
-   // console.log(currentTime)
-   this.setData({
-    currentLeft:this.data.currentLeft + 65,
-    currentTime:currentTime
-   })
-  }, 1000); 
- },
- reRecord:function(){
-  clearInterval(this.data.setInter1)
-  this.setData({
-   showhandle1:true,
-   showhandle2:false,
-   voiceState:false,
-   tempFilePath:'',
-   showWaveView:false,
-   startClick:false,
-   currentLeft:10,
-   recordingTimeqwe:0,
-   currentTime:'00'
-  })
- },
- uploadVoice:function(){
-  let that = this
-  this.setData({uploadState:true})
-  wx.uploadFile({
-   url: url_s,
-   filePath: this.data.tempFilePath,
-   name: 'file',
-   header:{
-    "Content-type":"multiply/form-data"
-   },
-   formData: {
-    'time': this.data.recordingTimeqwe
-   },
-   success (res){
-    console.log('上传成功')
-   },
-   fail (res){
-    console.log('上传失败')
-    that.setData({uploadState:false})
-   }
-  })
- },
- /**
-  * 生命周期函数--监听页面显示
-  */
- onShow: function () {
- },
- /**
-  * 生命周期函数--监听页面隐藏
-  */
- onHide: function () {
- },
- /**
-  * 生命周期函数--监听页面卸载
-  */
- onUnload: function () {
- },
- /**
-  * 页面相关事件处理函数--监听用户下拉动作
-  */
- onPullDownRefresh: function () {
- },
- /**
-  * 页面上拉触底事件的处理函数
-  */
- onReachBottom: function () {
- },
- /**
-  * 用户点击右上角分享
-  */
- onShareAppMessage: function () {
- }
+  
+ 
+  
 })
 
+
+ 

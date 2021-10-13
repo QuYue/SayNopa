@@ -823,7 +823,7 @@
    </view>
   </view>
   <view class="handleView" wx:if="{{showhandle1}}">
-   <view wx:if="{{!voiceState}}" class="CircleBtn green" bindtap="startRecord">开始</view>
+   <view wx:if="{{!voiceState}}" class="CircleBtn green" bindtap="startRecord">{{start_text}}</view>
    <view wx:if="{{voiceState}}" class="CircleBtn red" bindtap="shutRecord">录好了</view>
   </view>
   <view class="serviceList" wx:if="{{showhandle2}}">
@@ -832,6 +832,7 @@
    <view wx:if="{{uploadState}}" class="CircleBtn blue">上传中</view>
   </view>
   <view style="text-align: center;" wx:if="{{showhandle2}}" bindtap="reRecord">重新录制</view>
+  <button wx:if="{{showhandle2}}">开始诊断</button>
  </view>
 </view>
 
