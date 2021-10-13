@@ -39,15 +39,15 @@ def connect():
 def diagnose():
     start_time = time.time()
     received_file = request.files['file']
-    image_name = received_file.filename
+    file_name = received_file.filename
     if received_file:
         received_dirPath = './resources/received_file'
         if not os.path.isdir(received_dirPath):
             os.makedirs(received_dirPath)
-        image_path = os.path.join(received_dirPath, image_name)
+        file_path = os.path.join(received_dirPath, file_name)
         try:
-            received_file.save(image_path)
-            message = f'文件保存到{image_path}'
+            received_file.save(file_path)
+            message = f'文件保存到{file_path}'
         except:
             message = '文件保存出错'
     else:

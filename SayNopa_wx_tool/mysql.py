@@ -11,6 +11,8 @@
 from typing import NewType
 import pymysql
 import pandas as pd
+import datetime
+import time
 
 host = 'localhost'
 user = 'root'
@@ -47,13 +49,13 @@ class mysql_connecter():
             user = dict()
             status = 'new'
         else:
-            user = {'user_id':results[0][0], 'open_id': results[0][1], 'user_name': results[0][2]}
+            user = {'user_id':results[0][0], 'open_id': results[0][1], 'user_name': results[0][2], 'register_time': time.mktime(results[0][3].timetuple()) }
             status = 'exist'
         return status, user
 
     def add_user_openid(self, open_id):
         if self.find_user_openid(open_id)[0] == 'new':
-            sql = "insert into user_table(open_id) values ('{}')".format(str(open_id))
+            sql = "insert into user_table (open_id) values ('{}')".format(str(open_id))
             try:
                 self.execute(sql)
                 self.commit()
@@ -78,7 +80,25 @@ class mysql_connecter():
                 self.rollback()
                 d = {'status':'error'}
         return d
-            
+    
+    def add_file_openid(self, open_id, file_path, save_time):
+        file_type = file_path.split('.')[-1]
+        result = self.find_user_openid(open_id)
+        if result[0] == 'new':
+            d = {'status':'error'}
+        else:
+            sql = "insert into file_table (open_id, user_name, file_path, file_type, save_time) values ('{}', '{}', '{}', '{}', '{}')".format(str(open_id), str(result[1]['user_name']), file_path, file_type, save_time)
+            try:
+                self.execute(sql)
+                self.commit()
+                d = {'status':'success'}
+            except:
+                self.rollback()
+                d = {'status':'error'}
+        return d
+
+
+
     def clear_table(self, table):
         sql = 'truncate table {}'.format(str(table))
         self.execute(sql)

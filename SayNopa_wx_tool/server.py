@@ -12,8 +12,10 @@ import os
 import time
 import json
 import requests
+import datetime
 from flask import Flask, request, render_template, jsonify
 import mysql
+
 
 #%%
 app = Flask(__name__)
@@ -51,15 +53,14 @@ def connect2():
     else:
         data = request.get_data()
         data = json.loads(data)
-    print(data)
     receive_time = time.time()
     get = data['get']
     get = get[1:-1]
     response = requests.get(get)
     data = json.loads(response.content)
     open_id = data['openid']
+    print(f'open_id: {open_id} 请求登录')
     result = mc.find_user_openid(open_id)
-    print(result)
     if result[0] == 'exist':
         result[1]['ifnew'] = False
         result[1]['error'] = False
@@ -91,6 +92,33 @@ def alter_username():
         result['user_name'] = user_name
     return json.dumps(result)
 
+@app.route('/speech/<open_id>', methods=['POST'])
+def get_speech(open_id):
+    received_file = request.files['file']
+    received_file_name = received_file.filename
+    file_type = received_file_name.split('.')[-1]
+    if received_file: 
+        received_dirPath = f'./resources/received_file/{open_id}/'
+        if not os.path.isdir(received_dirPath):
+            os.makedirs(received_dirPath)
+        save_time = datetime.datetime.now()
+        file_name = save_time.strftime("%Y-%m-%d_%H-%M-%S")+'.'+file_type
+        file_path = os.path.join(received_dirPath, file_name)
+        try:
+            received_file.save(file_path)
+            message = f'文件成功保存到{file_path}'
+        except:
+            message = '文件保存出错'
+
+        if message[2] == '成':
+            status = mc.add_file_openid(open_id, file_path, save_time)
+            status = status['status']
+        else:
+            status = 'error'
+    else:
+        message = '未接收到文件'
+    print({'status': status, 'message': message})
+    return json.dumps({'status': status, 'message': message})
 
 @app.route('/diagnose', methods=['POST'])
 def diagnose():
