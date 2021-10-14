@@ -1,26 +1,26 @@
+<view class='user'>用户 {{user_name}}</view>
 <view class="view">
-
   <view class="window">
     <text>请根据计时器把握录制时间为5-6s：  </text>
     <view style="display: inline-block;" animation="{{animationData}}">{{time}}</view>
 
     <canvas  class="myCanvas" canvas-id="myCanvas" style="border: 1px solid;"/>
     <camera class="camera" device-position="front" wx:if="{{camera}}" flash="off">
+ <view class='face_pos'> 采集情况：{{x1}}</view>
     </camera>
   </view>
 
 
   <view class="btn_all">
       <view class='btn_open'>
-        <button bindtap="open" type="primary" data-type="takeRecord">采集视频</button>
+        <button class="s_btn" style="width:47vw" bindtap="open" data-type="takeRecord">采集视频</button>
       </view>
       <view class='btn_close'>
-        <button bindtap="close" type="primary" data-type="endRecord">停止</button>
+        <button class="s_btn" style="width:47vw" bindtap="close"  data-type="endRecord">停止</button>
       </view>    
   </view>
-  <view class='face_pos'>
-    <text>采集情况与是否患病：{{x1}} , {{x2}}</text>
-  </view>
+
+  <button class="diagnosebtn" wx:if="{{uploadSuccess}}">进行诊断</button>
 </view>
 
 

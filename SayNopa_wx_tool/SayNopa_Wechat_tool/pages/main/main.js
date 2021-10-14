@@ -107,26 +107,17 @@ Page({
     if (this.data.open_id != '') {
       wx.navigateTo({
         url: "../speech/speech?user_name="+that.data.name+"&open_id="+that.data.open_id,
-        // success: function(res) {
-        //   // 通过eventChannel向被打开页面传送数据
-        //   // res.eventChannel.emit('acceptDataFromOpenerPage', { ttt: 'test' })
-        // }
       });
-      // console.log(app.userInfo.open_id);
-      // app.userInfo = {
-      //   open_id: this.data.open_id,
-      //   user_name: this.data.name,
-      //   };
-      // console.log(app.userInfo.open_id);
     }
     else
     {this.setData({out_in: '请先登录'})}
   },
 
   face: function() {
+    const that = this;
     if (this.data.open_id != '') {
       wx.navigateTo({
-        url: "../face/face"
+        url: "../face/face?user_name="+that.data.name+"&open_id="+that.data.open_id,
       })
     }
     else

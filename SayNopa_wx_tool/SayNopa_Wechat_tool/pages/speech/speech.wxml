@@ -1,11 +1,8 @@
-<!--pages/speech.wxml-->
 <view class='user'>用户 {{user_name}}</view>
-
-<!--pages/face/face.wxml-->
 <view class="servicePage">
- <view style="width:100%;height:320rpx;position:absolute;z-index:-1;">
-  <image style="width:100%" src="../../img/speak/bg.png" mode='widthFix'></image>
- </view>
+ <!-- <view style="width:100%;height:320rpx;position:absolute;z-index:-1;">
+  <image style="width:100%" src="../../img/bg.png" mode='widthFix'></image>
+ </view> -->
  <view class="content" style="height:{{contentHeight}}">
   <view class="allService">
    <view class="title">
@@ -823,17 +820,16 @@
    </view>
   </view>
   <view class="handleView" wx:if="{{showhandle1}}">
-   <view wx:if="{{!voiceState}}" class="CircleBtn green" bindtap="startRecord">{{start_text}}</view>
+   <view wx:if="{{!voiceState}}" class="CircleBtn green" bindtap="startRecord">{{start_button_text}}</view>
    <view wx:if="{{voiceState}}" class="CircleBtn red" bindtap="shutRecord">录好了</view>
   </view>
   <view class="serviceList" wx:if="{{showhandle2}}">
    <view class="CircleBtn red" bindtap="listen" bindtap="listenRecord">试听</view>
    <view wx:if="{{!uploadState}}" class="CircleBtn green" bindtap="uploadVoice">上传</view>
-   <view wx:if="{{uploadState}}" class="CircleBtn blue">上传中</view>
+   <view wx:if="{{uploadState}}" class="CircleBtn blue">{{upload_butten_text}}</view>
   </view>
   <view style="text-align: center;" wx:if="{{showhandle2}}" bindtap="reRecord">重新录制</view>
-  <button wx:if="{{showhandle2}}">开始诊断</button>
+  <button class="diagnosebtn" style="text-align: center;" wx:if="{{uploadSuccess}}" bindtap="reRecord">进行诊断</button>
  </view>
 </view>
-
 

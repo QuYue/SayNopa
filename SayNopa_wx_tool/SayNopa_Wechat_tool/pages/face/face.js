@@ -3,8 +3,10 @@
 var that
 var animation = wx.createAnimation({
   duration: 300,
-    timingFunction: 'ease',
+  timingFunction: 'ease',
 })
+var url_f = "https://nopa.datahys.com:8000/file_save"
+
 /**
  * [倒计时函数，有放大动画效果]
  * @param  {Number} minutes         [分钟]
@@ -63,7 +65,8 @@ Page({
     device:true,
     camera: true,
     x1: '未收集',
-    x2:'none'
+    x2:'none',
+    uploadSuccess: false,
   },
 
   onLoad() {
@@ -82,16 +85,14 @@ Page({
       }
     })
   },
-  onLoad: function(){
+
+  onLoad: function(options){
     that = this
+    this.setData({user_name: options.user_name, open_id: options.open_id, uploadSuccess: false})
     countDown(0,25)
   },
   onUnload: function () {
     myStopFunction()
-    
-    
-    
-
   },
   
   open() {
@@ -125,42 +126,30 @@ Page({
     let that = this
     if (type="endRecord" ){
       that.setData({
-        x1:'收集完毕，诊断中'
+        x1:'收集完毕并上传'
       })
       ctx.stopRecord({
         success:(res) =>{
           console.log(res.tempVideoPath)
           var tempVideoPath=res.tempVideoPath
           wx.uploadFile({
-            url: 'http://10.5.73.10:5000//upload',
+            url: url_f+'/'+that.data.open_id,
             filePath: tempVideoPath,
             name: 'file',
             header:{"Content-type":"multipart/form-data"},
             success:function(res){
-              var im_path = res.data
-              console.log(im_path)
-              wx.request({
-                url: 'http://10.5.73.10:5000//inference',
-                method: "GET",
-                header: {"Content-type":"application/json"},
-                success:function(res){
-                  var content=res.data
-                  console.log(content)
-                 that.setData({
-                  x2:content
-                 })
-                }
-              })
+              var result_re = JSON.parse(res.data)
+              if (result_re.status == 'success')
+              {that.setData({uploadSuccess: true, x1:'上传成功'})}
             }
           })
         }    
       })
+      // if (this.data.x1!='上传成功'){this.setData({x1: '上传失败'})}
     }
-    
   }
   
  
-  
 })
 
 
