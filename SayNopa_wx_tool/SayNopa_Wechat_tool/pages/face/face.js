@@ -6,6 +6,13 @@ var animation = wx.createAnimation({
   timingFunction: 'ease',
 })
 var url_f = "https://nopa.datahys.com:8000/file_save"
+var url_df = "https://nopa.datahys.com:8000/diagnose_face"
+var now = 0;
+
+function gettime() {
+  var d = new Date();
+  return d.getTime()/1000;
+}
 
 /**
  * [倒计时函数，有放大动画效果]
@@ -67,6 +74,10 @@ Page({
     x1: '未收集',
     x2:'none',
     uploadSuccess: false,
+    diagnose_button_text: '进行诊断',
+    already_diagnose: false,
+    open_id: '',
+    file_id: 0,
   },
 
   onLoad() {
@@ -88,7 +99,7 @@ Page({
 
   onLoad: function(options){
     that = this
-    this.setData({user_name: options.user_name, open_id: options.open_id, uploadSuccess: false})
+    this.setData({user_name: options.user_name, open_id: options.open_id, uploadSuccess: false, diagnose_button_text: '进行诊断', already_diagnose: false})
     countDown(0,25)
   },
   onUnload: function () {
@@ -97,7 +108,11 @@ Page({
   
   open() {
     this.setData({
-      camera: true
+      camera: true,
+      uploadSuccess: false,
+      diagnose_button_text: '进行诊断',
+      already_diagnose: false,
+      file_id: 0,
     })
     type = "takeRecord";
     let ctx = wx.createCameraContext(this)
@@ -140,15 +155,45 @@ Page({
             success:function(res){
               var result_re = JSON.parse(res.data)
               if (result_re.status == 'success')
-              {that.setData({uploadSuccess: true, x1:'上传成功'})}
+              {that.setData({uploadSuccess: true, x1:'上传成功',file_id: result_re.file_id})}
             }
           })
         }    
       })
       // if (this.data.x1!='上传成功'){this.setData({x1: '上传失败'})}
     }
+  },
+  diagnose_face: function() {
+    if (this.data.already_diagnose)
+        {return }
+    const that = this;
+    this.setData({diagnose_button_text: '诊断中', already_diagnose: false});
+    if (this.data.file_id == 0)
+    {console.log('出错了')}
+    else{
+        now = gettime();
+        wx.request({
+            url : url_df,
+            method: "POST",
+            data: {
+                send_time : JSON.stringify(now),
+                file_id : this.data.file_id
+            },
+            success (res){
+                if (res.data.status=='success'){
+                    if (res.data.PD < 0.5) {
+                        that.setData({diagnose_button_text: '恭喜你，你很健康', already_diagnose: true})
+                    }
+                    else
+                    {   that.setData({diagnose_button_text: '有帕金森病的风险', already_diagnose: true})
+                    }}
+                else
+                {that.setData({diagnose_button_text: '诊断失败', already_diagnose: false})}
+            }
+            
+        })
+    }
   }
-  
  
 })
 

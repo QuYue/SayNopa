@@ -85,5 +85,5 @@ page{
 }
  
 .diagnosebtn {
-  background-color: #3ed3ca;
+  background-color:rgb(132, 232, 245);
 }

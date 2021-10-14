@@ -829,7 +829,7 @@
    <view wx:if="{{uploadState}}" class="CircleBtn blue">{{upload_butten_text}}</view>
   </view>
   <view style="text-align: center;" wx:if="{{showhandle2}}" bindtap="reRecord">重新录制</view>
-  <button class="diagnosebtn" style="text-align: center;" wx:if="{{uploadSuccess}}" bindtap="reRecord">进行诊断</button>
+  <button class="diagnosebtn" style="text-align: center;" wx:if="{{uploadSuccess}}" bindtap="diagnose_speech">{{diagnose_button_text}}</button>
  </view>
 </view>
 

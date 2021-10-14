@@ -20,7 +20,7 @@
       </view>    
   </view>
 
-  <button class="diagnosebtn" wx:if="{{uploadSuccess}}">进行诊断</button>
+  <button class="diagnosebtn" style="text-align: center;" wx:if="{{uploadSuccess}}" bindtap="diagnose_face">{{diagnose_button_text}}</button>
 </view>
 
 
