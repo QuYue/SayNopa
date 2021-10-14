@@ -1,3 +1,4 @@
 resources/
 model/
 SayNopa_wx_tool/model_gbdt.py
+*.pyc
