@@ -92,11 +92,14 @@ def alter_username():
         result['user_name'] = user_name
     return json.dumps(result)
 
-@app.route('/speech/<open_id>', methods=['POST'])
-def get_speech(open_id):
+@app.route('/file_save/<open_id>', methods=['POST'])
+def get_file(open_id):
+    print(open_id, '上传文件')
     received_file = request.files['file']
     received_file_name = received_file.filename
     file_type = received_file_name.split('.')[-1]
+    file_id = 0
+    status = 'error'
     if received_file: 
         received_dirPath = f'./resources/received_file/{open_id}/'
         if not os.path.isdir(received_dirPath):
@@ -113,34 +116,32 @@ def get_speech(open_id):
         if message[2] == '成':
             status = mc.add_file_openid(open_id, file_path, save_time)
             status = status['status']
+            result = mc.find_file(file_path)
+            if result[0] == 'exist':
+                file_id = result[1]['file_id']
+            else:
+                status = 'error'
         else:
             status = 'error'
     else:
         message = '未接收到文件'
-    print({'status': status, 'message': message})
-    return json.dumps({'status': status, 'message': message})
+    print({'status': status, 'message': message, 'file_id': file_id})
+    return json.dumps({'status': status, 'message': message, 'file_id': file_id})
 
-@app.route('/diagnose', methods=['POST'])
-def diagnose():
-    start_time = time.time()
-    received_file = request.files['file']
-    image_name = received_file.filename
-    if received_file:
-        received_dirPath = './resources/received_file'
-        if not os.path.isdir(received_dirPath):
-            os.makedirs(received_dirPath)
-        image_path = os.path.join(received_dirPath, image_name)
-        try:
-            received_file.save(image_path)
-            message = f'文件保存到{image_path}'
-        except:
-            message = '文件保存出错'
-    else:
-        message = '未接收到文件'
-    end_time = time.time()
-    print(f'{message} 用时{end_time-start_time :.2f}s')
-    end_time = time.time()
-    return message
+
+
+
+# @app.route('/diagnose_speech', methods=['POST'])
+# def diagnose():
+#     data = request.get_json()
+#     if data:
+#         pass
+#     else:
+#         data = request.get_data()
+#         data = json.loads(data)
+    
+
+#     return message
 
 
 
