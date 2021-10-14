@@ -129,19 +129,34 @@ def get_file(open_id):
     return json.dumps({'status': status, 'message': message, 'file_id': file_id})
 
 
+@app.route('/diagnose_speech', methods=['POST'])
+def diagnose_speech():
+    data = request.get_json()
+    if data:
+        pass
+    else:
+        data = request.get_data()
+        data = json.loads(data)
+    print(data)
+    status = 'success'
+    pd = 0.8
+    time.sleep(1)
+    return json.dumps({'status': status, 'PD': pd})
 
 
-# @app.route('/diagnose_speech', methods=['POST'])
-# def diagnose():
-#     data = request.get_json()
-#     if data:
-#         pass
-#     else:
-#         data = request.get_data()
-#         data = json.loads(data)
-    
-
-#     return message
+@app.route('/diagnose_face', methods=['POST'])
+def diagnose_face():
+    data = request.get_json()
+    if data:
+        pass
+    else:
+        data = request.get_data()
+        data = json.loads(data)
+    print(data)
+    status = 'success'
+    pd = 0.8
+    time.sleep(1)
+    return json.dumps({'status': status, 'PD': pd})
 
 
 
