@@ -105,7 +105,7 @@ with open('./gbdt.pkl', 'rb') as f:
 y_pred= model.predict(X_test)
 y_predprob= model.predict_proba(X_test)[:,1]
 print("Accuracy : %.4g" % metrics.accuracy_score(y_test, y_pred))
-print("AUC Score (Train): %f" % metrics.roc_auc_score(y_test, y_predprob))
+print("AUC Score (Test): %f" % metrics.roc_auc_score(y_test, y_predprob))
 
 y_pred= model.predict(X_train)
 y_predprob= model.predict_proba(X_train)[:,1]
