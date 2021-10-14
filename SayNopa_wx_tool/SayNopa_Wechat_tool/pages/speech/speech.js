@@ -107,7 +107,8 @@ Page({
             sampleRate: 44100,
             numberOfChannels: 1,
             encodeBitRate: 192000,
-            format: 'aac',
+            // format: 'aac',
+            format: 'mp3',
             frameSize: 50
         }
         // 开始倒计时
