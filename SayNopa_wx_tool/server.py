@@ -15,11 +15,13 @@ import requests
 import datetime
 from flask import Flask, request, render_template, jsonify
 import mysql
-
+import model_gbdt
 
 #%%
 app = Flask(__name__)
 mc = mysql.mysql_connecter()
+model_speech = model_gbdt.GBDT('./model/gbdt.pkl')
+
 # 设置开启web服务后，如果更新html文件，可以使更新立即生效
 # app.jinjia_env.auto_reload = True
 # app.config['TEMPLATES_AUTO_RELOAD'] = True
@@ -139,9 +141,12 @@ def diagnose_speech():
         data = json.loads(data)
     print(data)
     status = 'success'
-    pd = 0.1
-    time.sleep(1)
-    return json.dumps({'status': status, 'PD': pd})
+    path = mc.find_file_id(int(data["file_id"]))
+    path = path[1]['file_path']
+    print(f'path==={path}')
+    result, feature = model_speech.predict(path)
+    print(result)
+    return json.dumps({'status': status, 'PD': result, 'feature': feature})
 
 
 @app.route('/diagnose_face', methods=['POST'])

@@ -108,7 +108,17 @@ class mysql_connecter():
             status = 'exist'
         return status, user
 
-
+    def find_file_id(self, file_id):
+        sql = "select file_path from file_table where file_id='{}'".format(file_id)
+        self.execute(sql)
+        results= self.cursor.fetchall()
+        if len(results) == 0:
+            path = dict()
+            status = 'new'
+        else:
+            path = {'file_path':results[0][0]}
+            status = 'exist'
+        return status, path
 
 
     def clear_table(self, table):
