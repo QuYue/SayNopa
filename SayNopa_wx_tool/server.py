@@ -139,7 +139,7 @@ def diagnose_speech():
         data = json.loads(data)
     print(data)
     status = 'success'
-    pd = 0.8
+    pd = 0.1
     time.sleep(1)
     return json.dumps({'status': status, 'PD': pd})
 
@@ -154,10 +154,9 @@ def diagnose_face():
         data = json.loads(data)
     print(data)
     status = 'success'
-    pd = 0.8
+    pd = 0.1
     time.sleep(1)
     return json.dumps({'status': status, 'PD': pd})
-
 
 
 if __name__ == '__main__':
