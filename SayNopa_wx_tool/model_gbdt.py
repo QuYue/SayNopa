@@ -4,7 +4,7 @@ import numpy as np
 import pickle
 import parselmouth
 import matplotlib.pyplot as plt
-import seaborn as sns
+import seaborn as snsee
 
 #%%
 class GBDT():
@@ -84,5 +84,5 @@ if __name__ == "__main__":
     path = mc.find_file_id(6)
     path = '.' + path[1]['file_path']
     result, feature = model.predict(path)
-
+    
 # %%
