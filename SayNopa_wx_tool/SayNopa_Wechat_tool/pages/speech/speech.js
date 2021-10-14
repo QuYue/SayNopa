@@ -25,6 +25,7 @@ Page({
         upload_butten_text: '上传中',
         diagnose_button_text: '进行诊断',
         already_diagnose: false,
+        result_text: '',
         open_id: '',
         file_id: 0,
         contentHeight: contentHeight,
@@ -43,7 +44,7 @@ Page({
     },
 
     onLoad: function (options) {
-        this.setData({user_name: options.user_name, open_id: options.open_id, upload_butten_text: '上传中', diagnose_button_text: '进行诊断',already_diagnose: false}),
+        this.setData({user_name: options.user_name, open_id: options.open_id, upload_butten_text: '上传中', diagnose_button_text: '进行诊断',already_diagnose: false, result_text: ''}),
         this.initRecord()
     },
     
@@ -169,7 +170,8 @@ Page({
             startClick:false,
             currentLeft:10,
             recordingTimeqwe:0,
-            currentTime:'00'
+            currentTime:'00',
+            result_text: '',
         })
     },
 
@@ -217,16 +219,17 @@ Page({
                 success (res){
                     if (res.data.status=='success'){
                         if (res.data.PD < 0.5) {
-                            that.setData({diagnose_button_text: '恭喜你，你很健康', already_diagnose: true})
+                            var d = res.data.PD * 100
+                            that.setData({diagnose_button_text: '恭喜你，你很健康', already_diagnose: true, result_text: '有'+d.toFixed(0)+'%患病风险'})
                         }
                         else
-                        {   that.setData({diagnose_button_text: '有帕金森病的风险', already_diagnose: true})
+                        {   that.setData({diagnose_button_text: '有帕金森病的风险', already_diagnose: true, result_text: '有'+d.toFixed(0)+'%患病风险'})
                         }}
                     else
                     {that.setData({diagnose_button_text: '诊断失败', already_diagnose: false})}
                 },
                 fail (res){
-                    that.setData({uploadState:false, upload_butten_text: '成功', already_diagnose: false})
+                    that.setData({uploadState:false, upload_butten_text: '成功', already_diagnose: false, result_text:''})
                 }
             })
         }

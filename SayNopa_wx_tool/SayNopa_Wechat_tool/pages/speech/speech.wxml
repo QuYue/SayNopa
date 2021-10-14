@@ -6,7 +6,7 @@
  <view class="content" style="height:{{contentHeight}}">
   <view class="allService">
    <view class="title">
-    录制提示
+    录制提示：请在录音期间发出声音
    </view>
   </view>
   <view class="voiceView">
@@ -830,6 +830,7 @@
   </view>
   <view style="text-align: center;" wx:if="{{showhandle2}}" bindtap="reRecord">重新录制</view>
   <button class="diagnosebtn" style="text-align: center;" wx:if="{{uploadSuccess}}" bindtap="diagnose_speech">{{diagnose_button_text}}</button>
+  <view style="text-align: center;" wx:if="{{uploadSuccess}}">{{result_text}}</view>
  </view>
 </view>
 
