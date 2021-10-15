@@ -17,3 +17,4 @@
     <view class="comment1"> 若连接成功则可以进入程序</view> 
     <button bindtap="onClick2" class="{{button2}}">进入程序</button>
 </view>
+<view class="comment2"> 版本号 V1.0</view> 

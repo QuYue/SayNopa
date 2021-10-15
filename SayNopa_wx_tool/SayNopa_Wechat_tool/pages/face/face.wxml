@@ -6,7 +6,7 @@
 
     <canvas  class="myCanvas" canvas-id="myCanvas" style="border: 1px solid;"/>
     <camera class="camera" device-position="front" wx:if="{{camera}}" flash="off">
- <view class='face_pos'> 采集情况：{{x1}}</view>
+      <view class='face_pos'>{{x1}}</view>
     </camera>
   </view>
 
@@ -21,6 +21,7 @@
   </view>
 
   <button class="diagnosebtn" style="text-align: center;" wx:if="{{uploadSuccess}}" bindtap="diagnose_face">{{diagnose_button_text}}</button>
+  <view style="text-align: center;" wx:if="{{showsuccess}}">{{result_text}}</view>
 </view>
 
 

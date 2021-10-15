@@ -71,11 +71,13 @@ Page({
   data: {
     device:true,
     camera: true,
-    x1: '未收集',
+    x1: '未采集',
     x2:'none',
+    result_text:'',
     uploadSuccess: false,
     diagnose_button_text: '进行诊断',
     already_diagnose: false,
+    showsuccess:false,
     open_id: '',
     file_id: 0,
   },
@@ -99,7 +101,7 @@ Page({
 
   onLoad: function(options){
     that = this
-    this.setData({user_name: options.user_name, open_id: options.open_id, uploadSuccess: false, diagnose_button_text: '进行诊断', already_diagnose: false})
+    this.setData({user_name: options.user_name, open_id: options.open_id, uploadSuccess: false,  x1: '未采集', diagnose_button_text: '进行诊断', result_text: '', already_diagnose: false, showsuccess:false})
     countDown(0,25)
   },
   onUnload: function () {
@@ -111,7 +113,9 @@ Page({
       camera: true,
       uploadSuccess: false,
       diagnose_button_text: '进行诊断',
+      result_text: '',
       already_diagnose: false,
+      showsuccess:false,
       file_id: 0,
     })
     type = "takeRecord";
@@ -141,7 +145,7 @@ Page({
     let that = this
     if (type="endRecord" ){
       that.setData({
-        x1:'收集完毕并上传'
+        x1:'采集完毕并上传'
       })
       ctx.stopRecord({
         success:(res) =>{
@@ -167,7 +171,7 @@ Page({
     if (this.data.already_diagnose)
         {return }
     const that = this;
-    this.setData({diagnose_button_text: '诊断中', already_diagnose: false});
+    this.setData({diagnose_button_text: '诊断中（约20s）', already_diagnose: false});
     if (this.data.file_id == 0)
     {console.log('出错了')}
     else{
@@ -180,12 +184,17 @@ Page({
                 file_id : this.data.file_id
             },
             success (res){
+              console.log(res.data)
                 if (res.data.status=='success'){
-                    if (res.data.PD < 0.5) {
-                        that.setData({diagnose_button_text: '恭喜你，你很健康', already_diagnose: true})
-                    }
-                    else
-                    {   that.setData({diagnose_button_text: '有帕金森病的风险', already_diagnose: true})
+                    if  (res.data.error)
+                    {that.setData({diagnose_button_text: '诊断失败', already_diagnose: true, showsuccess:true, result_text: res.data.error_reason}),
+                  console.log('11111111111111111111')}
+                    else{
+                        if (res.data.PD < 0.5) {
+                            that.setData({diagnose_button_text: '恭喜你，你很健康', showsuccess:true, already_diagnose: true})
+                        }
+                        else
+                        {   that.setData({diagnose_button_text: '有帕金森病的风险', showsuccess:true, already_diagnose: true})}
                     }}
                 else
                 {that.setData({diagnose_button_text: '诊断失败', already_diagnose: false})}
