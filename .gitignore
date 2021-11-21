@@ -3,3 +3,4 @@ model/
 SayNopa_wx_tool/model_gbdt.py
 *.pyc
 
+SayNopa_wx_tool/SayNopa_Wechat_tool/project.config.json
