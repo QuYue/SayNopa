@@ -15,12 +15,14 @@ import requests
 import datetime
 from flask import Flask, request, render_template, jsonify
 import mysql
-import model_gbdt
+import Model_Speech
+import Model_Face
 
 #%%
 app = Flask(__name__)
-mc = mysql.mysql_connecter()
-model_speech = model_gbdt.GBDT('./model/gbdt.pkl')
+# mc = mysql.mysql_connecter()
+model_speech = Model_Speech.GBDT('./model/gbdt_speech.pkl')
+model_face = Model_Face.SVM('./model/svm_face.pkl')
 
 # 设置开启web服务后，如果更新html文件，可以使更新立即生效
 # app.jinjia_env.auto_reload = True
@@ -49,6 +51,7 @@ def connect():
 
 @app.route('/connect2', methods=['POST'])
 def connect2():
+    mc = mysql.mysql_connecter()
     data = request.get_json()
     if data:
         pass
@@ -74,10 +77,12 @@ def connect2():
             result[1]['error'] = False
         else:
             result = [0, {'error':True, 'open_id':open_id}]
+    mc.close()
     return json.dumps(result[1])
 
 @app.route('/alter_username', methods=['POST'])
 def alter_username():
+    mc = mysql.mysql_connecter()
     data = request.get_json()
     if data:
         pass
@@ -92,10 +97,12 @@ def alter_username():
     else:
         result = mc.alter_username_openid(open_id, user_name)
         result['user_name'] = user_name
+    mc.close()
     return json.dumps(result)
 
 @app.route('/file_save/<open_id>', methods=['POST'])
 def get_file(open_id):
+    mc = mysql.mysql_connecter()
     print(open_id, '上传文件')
     received_file = request.files['file']
     received_file_name = received_file.filename
@@ -128,11 +135,13 @@ def get_file(open_id):
     else:
         message = '未接收到文件'
     print({'status': status, 'message': message, 'file_id': file_id})
+    mc.close()
     return json.dumps({'status': status, 'message': message, 'file_id': file_id})
 
 
 @app.route('/diagnose_speech', methods=['POST'])
 def diagnose_speech():
+    mc = mysql.mysql_connecter()
     data = request.get_json()
     if data:
         pass
@@ -146,11 +155,13 @@ def diagnose_speech():
     print(f'path==={path}')
     result, feature = model_speech.predict(path)
     print(result)
+    mc.close()
     return json.dumps({'status': status, 'PD': result, 'feature': feature})
 
 
 @app.route('/diagnose_face', methods=['POST'])
 def diagnose_face():
+    mc = mysql.mysql_connecter()
     data = request.get_json()
     if data:
         pass
@@ -159,9 +170,18 @@ def diagnose_face():
         data = json.loads(data)
     print(data)
     status = 'success'
+    path = mc.find_file_id(int(data["file_id"]))
+    path = path[1]['file_path']
+    print(f'path==={path}')
     pd = 0.1
-    time.sleep(1)
-    return json.dumps({'status': status, 'PD': pd})
+    result = model_face.predict(path)
+    result['status'] = status
+    if result['error']:
+        print(result['error_reason'])
+    else:
+        print(f"结果为{result['PD']}")
+    mc.close()
+    return json.dumps(result)
 
 
 if __name__ == '__main__':

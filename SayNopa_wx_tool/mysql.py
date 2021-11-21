@@ -34,6 +34,8 @@ class mysql_connecter():
         self.database.close()
 
     def execute(self, sql):
+        # lock.acquire()
+
         self.cursor.execute(sql)
     def commit(self):
         self.database.commit()
