@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>用户名修改</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/change_username.css" />
+    <script src="../js/jquery.js"></script>
+    <script src="../js/change_username.js" type="module"></script>
+  </head>
+
+  <body>
+    <div id="panel">
+      <div>
+        <img src="../img/index/banner.png" alt="" />
+      </div>
+      <h1 class="title">用户名修改</h1>
+
+      <div class="content">
+        <div class="username">
+          <span>新用户名：</span
+          ><input type="text" class="form-control" placeholder="请输入用户名" />
+        </div>
+
+        <div class="rep-username">
+          <span>再次确认</span>：<input
+            type="text"
+            class="form-control"
+            placeholder="请再次输入用户名"
+          />
+        </div>
+        <p class="describe">
+          注: 用户名必须为字母或数字并且长度不可以超出10个字符
+        </p>
+      </div>
+      <button type="button" class="btn btn-default notarize-btn">
+        确认修改
+      </button>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,73 @@
+body {
+  background-color: rgb(27, 58, 79);
+}
+#panel {
+  width: 800px;
+  /* height: 1000px; */
+  padding: 10px;
+  border-radius: 1rem;
+  margin: 0 auto;
+  background-color: white;
+}
+#panel .top {
+  text-align: center;
+  padding-top: 30px;
+}
+#panel .top span {
+  line-height: 53px;
+  font-size: 25px;
+}
+#panel .content {
+  width: 700px;
+  height: 650px;
+  line-height: 35px;
+  border-radius: 1rem;
+  margin: 20px auto 0 auto;
+  padding: 20px;
+  background-color: #f3f3f3;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+#panel .content p {
+  font-size: 20px;
+  margin-top: 50px;
+  font-weight: bold;
+}
+#panel .content .emphasis {
+  text-indent: 2rem;
+  margin: 0;
+  font-size: 16px;
+  color: red;
+}
+
+/* 滚动条样式 */
+/*滚动条的宽度*/
+#panel .content::-webkit-scrollbar {
+  width: 4px;
+}
+
+/*滚动条里面小方块*/
+#panel .content::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/*滚动条里面轨道*/
+/* #panel .content::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  border-radius: 0;
+  background: rgba(0, 0, 0, 0.1);
+} */
+#panel .agree-btn {
+  cursor: pointer;
+  display: block;
+  width: 500px;
+  height: 50px;
+  border: none;
+  border-radius: 5px;
+  margin: 30px auto;
+  font-size: 20px;
+  color: white;
+  background-color: #1b3a4f;
+}

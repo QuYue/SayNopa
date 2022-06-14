@@ -1,0 +1,18 @@
+/* 头部及导航栏  */
+#page-header {
+  height: 100px;
+  line-height: 100px;
+  background-color: #1b3a4f;
+  color: white;
+}
+#page-header h1 {
+  padding-left: 50px;
+  font-size: 50px;
+  margin: 0;
+  line-height: 100px;
+}
+
+.navbar-nav li {
+  width: 180px;
+  text-align: center;
+}

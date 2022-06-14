@@ -22,31 +22,55 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 #%%
 def time_in_detail(input_time):
     return time.strftime('%Y年%m月%d日 %H时%M分%S秒', time.localtime(input_time))
+    
 #%%
 @app.route('/')
 def index_page():
     return render_template('index.html')
 
-@app.route('/connect', methods=['POST'])
-def connect():
-    data = request.get_json()
-    if data:
-        pass
-    else:
-        data = request.get_data()
-        data = json.loads(data)
-    print(data)
-    receive_time = time.time()
-    receive_time_d = time.strftime('%Y年%m月%d日 %H时%M分%S秒', time.localtime(time.time()))
-    send_time = float(data['send_time'])
-    print(f'于{time_in_detail(receive_time)}连接成功')
-    return json.dumps({'status': 'success', 'TimeDelay':receive_time-send_time, 'receive_time': receive_time})
+@app.route('/login')
+def login_page():
+    return render_template('login.html')
 
-#%%
-@app.route('/diagnose_sound', methods=['POST'])
-def diagnose_sound():
-    start_time = time.time()
+@app.route('/register')
+def register_page():
+    return render_template('register.html')
+
+@app.route('/user_agreement')
+def user_agreement():
+    return render_template('user_agreement.html')
+
+@app.route('/diagnose')
+def diagnose_page():
+    return render_template('diagnose.html')
+
+@app.route('/body_guide')
+def body_guide_page():
+    return render_template('body_guide.html')
+
+@app.route('/handbook')
+def handbook_page():
+    return render_template('handbook.html')
+
+@app.route('/about_us')
+def about_us_page():
+    return render_template('about_us.html')
+
+@app.route('/change_username')
+def change_username_page():
+    return render_template('change_username.html')
+
+@app.route('/change_password')
+def change_password_page():
+    return render_template('change_password.html')
+
+@app.route('/diagnose_audio')
+def record_audio_page():
+    return render_template('record_audio.html')
             
+@app.route('/diagnose_video')
+def record_video_page():
+    return render_template('record_video.html')
 
 #%%
 if __name__ == "__main__":
@@ -54,6 +78,6 @@ if __name__ == "__main__":
 本产品的版权归大连理工大学Goldminer实验室所有，
 欢迎使用不帕服务端。
     """)
-    app.run(host='::',port=5000,debug=True)
+    app.run(host='::',port=8848,debug=True)
 
 

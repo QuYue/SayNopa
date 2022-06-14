@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>注册</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/register.css') }}" />
+    <script src="{{ url_for('static', filename= 'js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename= 'js/register.js') }}" type="module"></script>
+  </head>
+  <body>
+    <div>用户协议</div>
+    <div id="panel">
+      <div>
+        <img src="{{ url_for('static', filename= 'img/index/banner.png') }}" alt="" />
+      </div>
+      <h1 class="title">注 册</h1>
+
+      <div class="content">
+        <div class="username">
+          <span>用户名:</span
+          ><input type="text" class="form-control" placeholder="请输入用户名" />
+        </div>
+        <p class="describe">
+          注: 用户名必须为字母或数字并且长度不可以超出10个字符
+        </p>
+        <div class="password">
+          <span>密码</span> :
+          <input type="text" class="form-control" placeholder="请输入密码" />
+        </div>
+        <p class="describe">
+          注: 密码必须为字母或数字并且长度介于5-20个字符之间
+        </p>
+      </div>
+      <button type="button" class="btn btn-default register-btn">
+        同意用户协议并注册
+      </button>
+      <div class="user-agreement">
+        <a href="{{ url_for('user_agreement') }}">点击查看用户协议</a>
+      </div>
+    </div>
+  </body>
+</html>

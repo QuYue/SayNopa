@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>使用手册</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename= 'css/bootstrap.min.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename= 'css/common.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename= 'css/handbook.css') }}" />
+  <script src="{{ url_for('static', filename= 'js/jquery.js') }}"></script>
+  <script src="{{ url_for('static', filename= 'js/bootstrap.min.js') }}"></script>
+  <script src="{{ url_for('static', filename= 'js/handbook.js') }}" type="module"></script>
+</head>
+
+<body>
+  <!-- 头部内容 -->
+  <div id="page-header">
+    <h1>Welcome to <img src="{{ url_for('static', filename= 'img/login/logo.png') }}" width="100px" /></h1>
+  </div>
+
+  <!-- 导航条内容 -->
+
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li><a href="{{ url_for('diagnose_page') }}">不帕诊断 </a></li>
+          <li><a href="{{ url_for('body_guide_page') }}">养生指南</a></li>
+          <li class="active"><a href="javascript:;">使用手册</a></li>
+          <li><a href="{{ url_for('about_us_page') }}">关于我们</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+              aria-expanded="false">用户 <b><em id="bp-user">未登录</em></b> <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="{{ url_for('change_username_page') }}">修改用户名</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="{{ url_for('change_password_page') }}">修改密码</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div id="content">
+    <h1 class="title">微信小程序用户手机端操作手册</h1>
+    <div class="info">
+      <ul class="nav nav-pills nav-stacked info-nav">
+        <li role="presentation" class="active">
+          <a href="javascript:;">添加小程序</a>
+        </li>
+        <li role="presentation"><a href="javascript:;">测试链接</a></li>
+        <li role="presentation"><a href="javascript:;">信息修改</a></li>
+        <li role="presentation"><a href="javascript:;">语音诊断</a></li>
+        <li role="presentation"><a href="javascript:;">面部诊断</a></li>
+        <li role="presentation"><a href="javascript:;">退出程序</a></li>
+      </ul>
+      <div class="info-content">
+        <!-- 添加小程序 -->
+        <div class="add-procedure page">
+          <p>1.手机端：打开微信APP,点击”微信”主界面。</p>
+          <img src="{{ url_for('static', filename= 'img/handbook/img1.png') }}" />
+          <p>2.下滑主页面，在“搜索小程序”内输入【不帕】，</p>
+          <img src="{{ url_for('static', filename= 'img/handbook/img2.png') }}" />
+          <p>3.点击进入《不帕》小程序。</p>
+          <img src="{{ url_for('static', filename= 'img/handbook/img3.png') }}" />
+        </div>
+        <!-- 测试连接 -->
+        <div class="test-link page">
+          <p>
+            1.进入小程序，点击【测试】，测试成功会显示“连接成功
+            延迟**s“，点击【进入程序】。
+          </p>
+          <img src="{{ url_for('static', filename= 'img/handbook/img4.png') }}" />
+          <p>2.发生错误可能原因是：</p>
+          <img src="{{ url_for('static', filename= 'img/handbook/img5.png') }}" />
+        </div>
+        <!-- 信息修改 -->
+        <div class="info-change page">
+          <p>1.进入程序后，页面显示如下</p>
+          <img src="{{ url_for('static', filename= 'img/handbook/img6.png') }}" />
+          <p>
+            2.当用户未登陆时，点击【语音诊断】或者【面部诊断】，会出现如下错误，错误原因是：
+          </p>
+          <img src="{{ url_for('static', filename= 'img/handbook/img7.png') }}" />
+          <p>
+            3.没有错误后，点击【登录】，系统会自动为用户默认设置名字，如“用户1“
+          </p>
+          <img src="{{ url_for('static', filename= 'img/handbook/img8.png') }}" />
+          <p>
+            4.为了后台记录用户数据，建议用户修改名字，点击【信息修改】，输入名字，点击【提交】
+          </p>
+          <img src="{{ url_for('static', filename= 'img/handbook/img9.png') }}" />
+          <p>5.结束修改后得到主页面如下图：</p>
+          <img src="{{ url_for('static', filename= 'img/handbook/img10.png') }}" />
+        </div>
+        <!-- 语音诊断 -->
+        <div class="say-diagnose page">
+          <p>
+            1.点击主页面有麦克风图片的【语音诊断】按键，因为此APP大部分使用者均为老年人，为了老年人方便点击，我们特意将点击的图片进行了放大处理。进入语音诊断界面后，首次使用的用户将会出现以下界面
+          </p>
+          <img src="{{ url_for('static', filename= 'img/handbook/img11.png') }}" />
+          <p>
+            2.点击绿色【允许】按键，允许该APP使用用户的麦克风。结束后，整个界面如下：
+          </p>
+          <img src="{{ url_for('static', filename= 'img/handbook/img12.png') }}" />
+          <p>
+            3.点击绿色【开始】按钮，进行录音，绿色圆钮文字变成“录制中“，上面进度条可以让用户实时看见录制进程。
+          </p>
+          <img src="{{ url_for('static', filename= 'img/handbook/img13.png') }}" />
+          <p>
+            4.录制提示：建议用户在声音录制期间发出声音，最好是一个单音节字母声音。录制结束，界面如下：
+          </p>
+          <img src="{{ url_for('static', filename= 'img/handbook/img14.png') }}" />
+          <p>
+            5.用户可根据自身情况，点击【重新录制】，进行重新录制声音；点击红色按钮【试听】，可试听自己刚结束录制的声音；没有问题后，点击绿色按钮【上传】，上传到服务器进行诊断。出现如下界面，请用户稍等片刻，音频文件正在上传。
+          </p>
+          <img src="{{ url_for('static', filename= 'img/handbook/img15.png') }}" />
+          <p>6.上传成功后，出现如下界面：</p>
+          <img src="{{ url_for('static', filename= 'img/handbook/img16.png') }}" />
+          <p>
+            7.用户可根据自身情况，点击【重新录制】，进行重新录制声音；点击红色按钮【试听】，可试听自己刚结束录制的声音；没有问题后，点击绿色长方形按键【进行诊断】，出现如下界面
+          </p>
+          <img src="{{ url_for('static', filename= 'img/handbook/img17.png') }}" />
+          <p>
+            8.显示正在诊断中，请用户耐心等待，随后会出现如下两种情况之一的界面
+          </p>
+          <img src="{{ url_for('static', filename= 'img/handbook/img18.png') }}" />
+          <p>
+            9.出现以上界面，说明经过《不帕》微信小程序诊断后，您有**%患病风险
+          </p>
+          <img src="{{ url_for('static', filename= 'img/handbook/img19.png') }}" />
+          <p>
+            10.出现以上界面，说明经过《不帕》微信小程序诊断后，您有帕金森病的风险，
+            提醒：以上所有结果均为算法得出的结果，只作为参考，不作为诊断结果，用户具体情况还需及时就医。
+          </p>
+        </div>
+        <!-- 面部诊断 -->
+        <div class="face-diagnose page">
+          <p>
+            1.点击主页面有人头的【面部诊断】按键，因为此APP大部分使用者均为老年人，为了老年人方便点击，我们特意将点击的图片进行了放大处理。进入面部诊断界面后，首次使用的用户将会出现以下界面：
+          </p>
+          <img src="{{ url_for('static', filename= 'img/handbook/img20.png') }}" />
+          <p>
+            2.点击绿色【允许】按键，允许该APP使用用户的摄像头。结束后，整个界面如下
+          </p>
+          <img src="{{ url_for('static', filename= 'img/handbook/img21.png') }}" />
+          <p>
+            3.录制提示：建议单人用户在录制期间将整个面部放入摄像框内，并保持较小动作幅度，同时，希望用户多次反复缓慢地从普通表情，变成微笑表情，示例如下：
+          </p>
+          <img src="{{ url_for('static', filename= 'img/handbook/img22.png') }}" />
+          <img src="{{ url_for('static', filename= 'img/handbook/img23.png') }}" />
+          <p>4.点击界面左下方【采集视频】摄像框上面文字变为“采集中“：</p>
+          <img src="{{ url_for('static', filename= 'img/handbook/img24.png') }}" />
+          <p>
+            5.录制提示：请用户把握录制时间为5-6秒，并在录制期间小幅度完成表情从普通到微笑的变化。
+            点击界面右下方【停止】摄像框上面文字变为“采集完毕并上传“：
+          </p>
+          <img src="{{ url_for('static', filename= 'img/handbook/img25.png') }}" />
+          <p>
+            6.上传视频需要一定时间，请用户耐心等待，上传结束后，界面如下：
+          </p>
+          <img src="{{ url_for('static', filename= 'img/handbook/img26.png') }}" />
+          <p>
+            7.点击界面下方绿色长方形【进行诊断】，界面如下，因为诊断需要些许时间，请用户耐心等待。
+          </p>
+          <img src="{{ url_for('static', filename= 'img/handbook/img27.png') }}" />
+          <p>8.随后会出现如下两种情况之一的界面：</p>
+          <img src="{{ url_for('static', filename= 'img/handbook/img28.png') }}" />
+          <p>9.出现以上界面，说明经过《不帕》微信小程序诊断后，您很健康。</p>
+          <img src="{{ url_for('static', filename= 'img/handbook/img29.png') }}" />
+          <p>
+            10.出现以上界面，说明经过《不帕》微信小程序诊断后，您有帕金森病的风险。
+          </p>
+          <p>
+            提醒：以上所有结果均为算法得出的结果，只作为参考，不作为诊断结果，用户具体情况还需及时就医。
+          </p>
+        </div>
+        <!-- 退出程序 -->
+        <div class="exit page">
+          <p>点击左上角 “ < “，退出诊断界面。</p>
+              <img src="{{ url_for('static', filename= 'img/handbook/img30.png') }}" />
+              <p>
+                此小程序的建议均为算法得出的结果，只作为参考，不作为诊断结果，用户具体情况还需及时就医。
+              </p>
+              <p>最终解释权归大连理工大学创新创业学院所有</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

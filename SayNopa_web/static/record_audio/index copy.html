@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+
+	<title>不帕-语音诊断</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<h1>语音诊断</h1>
+	<p><small>点击"开始录音"按钮，朗读任意文字。</small></p>
+	<p><small>点击"停止录音"按钮，可预览已录制的声音。</small></p>
+	<p><small>点击"上传 & 检测"按钮，可上传录制的音频并执行检测。</small></p>
+	<div style="max-width: 28em;">
+		<!-- <p>Convert recorded audio to:</p> -->
+		<select id="encodingTypeSelect" style="visibility:hidden">
+		  <option value="wav">Waveform Audio (.wav)</option>
+		  <option value="mp3" selected>MP3 (MPEG-1 Audio Layer III) (.mp3)</option>
+		  <option value="ogg">Ogg Vorbis (.ogg)</option>
+		</select>
+		<div id="controls">
+			<button id="recordButton">开始录音</button>
+			<button id="stopButton" disabled>停止录音</button>
+		</div>
+		
+		<div id="formats" style="display:none"></div>
+		
+		<!-- <pre>录音预览</pre> -->
+
+		<div>
+			<ol id="recordingsList"></ol>
+		</div>
+		<button id="uploadButton"  style="display:none; width:100%; background-color: lightgreen;">上传 & 检测</button>
+		<div id="fileId" style="display:none;"></div>
+		<!-- <div id="upload" style="display:none; "></div>
+			<button id="uploadButton" style="background-color: gray;">上传</button>
+		</div> -->
+
+		<pre></pre>
+		<pre id="log" ></pre>
+
+		<!-- <iframe id="resultIframe" style="display: none; width:500px;height:300px;" src=''></iframe>  -->
+		<textarea id="checkResult" style="display:none;"  cols="50" rows="20"></textarea>
+
+	</div>
+
+	<!-- inserting these scripts at the end to be able to use all the elements in the DOM -->
+	<script src="js/WebAudioRecorder.min.js"></script>
+	<script src="js/app.js"></script>
+
+</body>
+</html>

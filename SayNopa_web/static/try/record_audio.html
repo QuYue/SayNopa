@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>录音诊断</title>
+</head>
+
+<body>
+    <div class="app">
+        <button id="recordBtn">开始录音</button>
+        <div id="message"></div>
+        
+        <div id="playerWrpper" style="visibility:hidden">
+            <audio controls id="audioPlayer">
+            </audio>
+            <button id="uploadBtn">上传</button>
+            <div id="fileId"></div>
+
+            <iframe id="resultIframe" style="width:500px;height:300px;" src=''></iframe> 
+
+        </div>
+
+    </div>
+    <script>
+        if (navigator.mediaDevices.getUserMedia) {
+            const constraints = { audio: true };
+            navigator.mediaDevices.getUserMedia(constraints).then(stream => {
+                console.log("授权成功！");
+                const recordBtn = document.getElementById("recordBtn");
+                const uploadBtn = document.getElementById("uploadBtn");
+                const audioPlayer = document.getElementById("audioPlayer");
+                const playerWrpper = document.getElementById("playerWrpper")
+                const message = document.getElementById("message")
+                // const mediaRecorder = new MediaRecorder(stream, {mimeType: 'audio/wav; codecs=opus'});
+                const mediaRecorder = new MediaRecorder(stream);
+                var chunks = [];
+                var audioBlob = null;
+                // var audioStream;
+                
+                mediaRecorder.onstop = (event) => {
+                    console.log('chunks: ', chunks)
+
+                    // audioBlob = new Blob(chunks, { type: "audio/ogg; codecs=opus" });
+                    audioBlob = new Blob(chunks, { type: "audio/mpeg-3" });
+                    console.log('audioBlob: ', audioBlob)
+                    // audioBlob = new Blob(chunks, { type: "audio/mp4; codecs=opus" });
+                    audioStream = window.URL.createObjectURL(audioBlob);
+                    console.log('audioStream: ', audioStream)
+                    audioPlayer.src = audioStream //window.URL.createObjectURL(audioBlob);
+                    // chunks = [];
+                    playerWrpper.style.visibility = "visible";
+
+                };
+
+                mediaRecorder.ondataavailable = function (event) {
+                    chunks.push(event.data);
+                    console.log(chunks)
+
+                };
+
+
+
+                recordBtn.onclick = () => {
+                    if (mediaRecorder.state === "recording") {
+                        mediaRecorder.stop();
+                        recordBtn.textContent = "开始录音";
+                        console.log("录音结束");
+                        message.textContent = '录音结束，请点击"上传"按钮做诊断。'
+
+                    } else {
+                        chunks = [];
+                        audioBlob = null
+                        mediaRecorder.start();
+                        message.textContent = '录音中...'
+                        recordBtn.textContent = "停止录音";
+                        playerWrpper.style.visibility = "hidden";
+                        document.getElementById('resultIframe').style.visibility = "hidden";
+                        document.getElementById('resultIframe').src = ''
+                        
+                    }
+                    console.log("recorder status：", mediaRecorder.state);
+                };
+
+                uploadBtn.onclick = () => {
+                    // alert('upload')
+                    // var blob = new Blob(chunks, {type: ''})
+                    console.log('blob', audioBlob)
+                    var file = new File(
+                        [audioBlob], 
+                        'audio-' + new Date().toISOString().replace(/:|\./g, '-') + '.mp3', 
+                        {type: 'audio/mpeg-3'}
+                    );
+                    var formData = new FormData()
+                    formData.append('file', file)
+                    var request = new XMLHttpRequest();
+                    request.open("POST", "http://www.yueming.top:8010/file_save/test");
+                    request.onload = async function(evt) {
+                        alert("loaded!");
+                        console.log('save done: ', evt)
+                        const res = JSON.parse(evt.currentTarget.responseText )
+                        console.log('res:', res)
+
+                        if (res.status === 'success') {
+                            document.getElementById('fileId').textContent = res.file_id
+                            request = null
+                            await perform_diagnose_speech()
+
+                        }
+                    };
+                    request.upload.addEventListener("progress", uploadProgress, false);
+                    request.addEventListener("error", uploadFailed, false);
+                    request.send(formData);
+                }
+
+            },
+                () => {
+                    console.error("授权失败！");
+                }
+            );
+        } else {
+            console.error("当前浏览器不支持音频录制。");
+        }
+
+        function uploadComplete(evt) {
+                /* This event is raised when the server send back a response */
+                alert(evt.target.responseText);
+                console.log('upload complete: ', evt)
+            }
+
+        function uploadProgress(evt) {
+            if (evt.lengthComputable) {
+                var percentComplete = Math.round(evt.loaded * 100 / evt.total);
+                document.getElementById('fileId').innerHTML = percentComplete.toString() + '%';
+            }
+            else {
+                document.getElementById('fileId').innerHTML = 'unable to compute';
+            }
+        }
+
+        function uploadFailed(evt) {
+            alert("There was an error attempting to upload the file.");
+        }
+
+
+        async function perform_diagnose_speech() {
+            const url = 'http://www.yueming.top:8010/diagnose_speech'
+            const fileId = parseInt( document.getElementById('fileId').textContent )
+            
+            const res = await fetch(url, {
+                method: 'POST', 
+                headers: {'Content-Type': 'application/json'}, 
+                body: JSON.stringify( {file_id: fileId})
+            })
+            const data = await res.text()
+            console.log('diagnose result: ', data)
+            document.getElementById('resultIframe').style.visibility= "visible";
+            document.getElementById('resultIframe').src = "data:text/html;charset=utf-8," + escape(data);
+
+        }
+
+        
+
+    </script>
+</body>
+
+</html>

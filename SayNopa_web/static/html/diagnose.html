@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>不帕诊断</title>
+  <link rel="stylesheet" href="../css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../css/diagnose.css" />
+  <link rel="stylesheet" href="../css/common.css" />
+  <link rel="stylesheet" href="../css/w3.css">
+  <script src="../js/jquery.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
+  <script src="../js/diagnose.js" type="module"></script>
+</head>
+
+<body>
+  <!-- 头部内容 -->
+  <div id="page-header">
+    <h1>Welcome to <img src="../img/login/logo.png" width="100px" /></h1>
+  </div>
+
+  <!-- 导航条内容 -->
+
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="javascript:;">不帕诊断 </a></li>
+          <li><a href="./body_guide.html">养生指南</a></li>
+          <li><a href="./handbook.html">使用手册</a></li>
+          <li><a href="./about_us.html">关于我们</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+              aria-expanded="false">用户<em id="bp-user">123</em> <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="./change_username.html">修改用户名</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="./change_password.html">修改密码</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 内容 -->
+  <div id="content">
+    <div class="w3-row-padding">
+      <div class="w3-third w3-margin-bottom left">
+        <ul class="w3-ul w3-border w3-center w3-hover-shadow">
+          <li class="w3-black w3-xlarge w3-padding-32">语音诊断</li>
+          <li class="w3-padding-16"><b>10秒</b> 录音</li>
+          <li class="w3-padding-16"><b>即时</b> 诊断</li>
+          <li class="w3-light-grey w3-padding-24">
+            <a href="../record_audio/index.html" class="w3-button w3-green w3-padding-large">开始</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="w3-third w3-margin-bottom right">
+        <ul class="w3-ul w3-border w3-center w3-hover-shadow">
+          <li class="w3-green w3-xlarge w3-padding-32">面部诊断</li>
+          <li class="w3-padding-16"><b>20秒</b> 录像</li>
+          <li class="w3-padding-16"><b>即时</b> 诊断</li>
+          <li class="w3-light-grey w3-padding-24">
+            <a href="../record_camera/index.html" class="w3-button w3-green w3-padding-large">开始</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

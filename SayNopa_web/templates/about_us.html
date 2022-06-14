@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>关于我们</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/common.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/about_us.css') }}" />
+    <script src="{{ url_for('static', filename= 'js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename= 'js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename= 'js/about_us.js') }}" type="module"></script>
+  </head>
+  <body>
+    <!-- 头部内容 -->
+    <div id="page-header">
+      <h1>Welcome to <img src="{{ url_for('static', filename= 'img/login/logo.png') }}" width="100px" /></h1>
+    </div>
+
+    <!-- 导航条内容 -->
+
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="{{ url_for('diagnose_page') }}">不帕诊断 </a></li>
+            <li><a href="{{ url_for('body_guide_page') }}">养生指南</a></li>
+            <li><a href="{{ url_for('handbook_page') }}">使用手册</a></li>
+            <li class="active"><a href="javascript:;">关于我们</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a
+                href="#"
+                class="dropdown-toggle"
+                data-toggle="dropdown"
+                role="button"
+                aria-haspopup="true"
+                aria-expanded="false"
+                >用户 <b><em id="bp-user">未登录</em></b> <span class="caret"></span
+              ></a>
+              <ul class="dropdown-menu">
+                <li><a href="{{ url_for('change_username_page') }}">修改用户名</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="{{ url_for('change_password_page') }}">修改密码</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- 正文内容 -->
+    <div id="content">
+      <o class="list">
+      <li>亲爱的用户们大家好，很高兴您可以使用我们的软件！
+      <li>我们是开发本软件的团队，是由大连理工大学创新创业学院金博教授实验室所开发，我们在微信小程序和网页端都有我们的软件啦！欢迎大家前去了解并使用！</li>
+      <li>我们的最初想法是，想给受帕金森疾病困扰的群体一个简易便携的方法去发现病情，为患者和他们的家人提供一个重视病情的机会，当然可以作为后续就医决定的简单判断手段。注意，此建议均为算法得出的结果，只作为参考，不作为诊断结果，用户具体情况还需及时就医。</li>
+      <li>最后祝受帕金森疾病困扰的患者们可以和其家人们一起相信科学，及时就医！患者自身的乐观是重要的城墙！家人的关爱和理解是坚实的基础！一起加油！！</li>
+      </o>
+      <h1 class="title">不帕-APP免责声明</h1>
+      <ol class="list">
+        <li>
+          一切移动客户端用户在下载并浏览不拍-APP手机
+          APP软件时均被视为已经仔细阅读本条款并完全同意。凡以任何方式登陆本APP，或直接、间接使用本APP资料者，均被视为自愿接受相关声明和用户服务协议的约束。
+        </li>
+        <li>
+          不帕-APP手机APP转载的内容并不代表APP手机APP之意见及观点，也不意味着本网赞同其观点或证实其内容的真实性。
+        </li>
+        <li>
+          APP手机APP转载的文字、图片、音视频等资料均由本APP用户提供，其真实性、准确性和合法性由信息发布人负责。APP手机APP不提供任何保证，并不承担任何法律责任。
+        </li>
+        <li>
+          本APP所检测及训练的结果，仅用于医学参考，不负法律责任，不能保证百分百的准确率。如因不帕-APP测试结果与实际情况不符导致的个人损失本APP不承担任何责任。
+        </li>
+        <li>
+          APP手机APP不保证为向用户提供便利而设置的外部链接的准确性和完整性，同时，对于该外部链接指向的不由APP手机APP实际控制的任何网页上的内容，APP手机APP不承担任何责任。
+        </li>
+        <li>
+          用户明确并同意其使用APP手机APP网络服务所存在的风险将完全由其本人承担；因其使用APP手机APP网络服务而产生的一切后果也由其本人承担，APP手机APP对此不承担任何责任。
+          除APP手机APP注明之服务条款外，其它因不当使
+        </li>
+        <li>
+          用本APP而导致的任何意外、疏忽、合约毁坏、诽谤版权或其他知识产权侵犯及其所造成的任何损失，APP手机APP概不负责，亦不承担任何法律责任。
+        </li>
+        <li>
+          对于因不可抗力或因黑客攻击、通讯线路中断等APP
+          手机APP不能控制的原因造成的网络服务中断或其他缺陷，导致用户不能正常使用APP手机APP，APP
+          手机APP不承担任何责任，但将尽力减少因此给用户造成的损失或影响。
+        </li>
+        <li>
+          本声明未涉及的问题请参见国家有关法律法规，当本声明与国家有关法律法规冲突时，以国家法律法规为准。
+        </li>
+        <li>
+          本APP相关声明版权及其修改权、更新权和最终解释权均属APP手机APP所有。
+        </li>
+      </ol>
+    </div>
+  </body>
+</html>

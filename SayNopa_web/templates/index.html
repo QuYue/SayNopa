@@ -1,13 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>不帕主页</title>
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>测试ipv6</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/index.css') }}" />
+    <script src="{{ url_for('static', filename= 'js/jquery.js') }}"></script>
+    <!-- <script src="../js/bootstrap.min.js"></script> -->
+    <script src="{{ url_for('static', filename= 'js/index.js') }}" type="module"></script>
+  </head>
+  <body>
+    <div id="content">
+      <div class="image">
+        <img src="{{ url_for('static', filename= 'img/index/about-us-banner.png') }}" width="850" />
+      </div>
+      <div class="jumbotron">
+        <div class="container">
+          <h1>本服务基于ipv6环境</h1>
+          <p>点击下方按钮进入ipv6服务器测试链接</p>
+          <p>测试成功后可点击进入主页</p>
+          <p>
+            <button class="btn btn-primary btn-lg test" role="button">
+              点击测试
+            </button>
 
-    </head>
-
-    <body>
-        你们好
-    </body>
+            <button disabled class="btn btn-primary btn-lg home" role="button">
+              进入主页
+            </button>
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

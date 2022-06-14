@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+
+	<title>不帕 - 面部诊断</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" href="../css/common.css">
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<script src="../js/jquery.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<!-- 头部内容 -->
+	<div id="page-header">
+		<h1>Welcome to <img src="../img/login/logo.png" width="100px" /></h1>
+	</div>
+
+	<!-- 导航条内容 -->
+
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="javascript:;">不帕诊断 </a></li>
+					<li><a href="../html/body_guide.html">养生指南</a></li>
+					<li><a href="../html/handbook.html">使用手册</a></li></a>
+					<li><a href="../html/about_us.html">关于我们</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+							aria-expanded="false">用户<em id="bp-user">123</em> <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="./change_username.html">修改用户名</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="./change_password.html">修改密码</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div id='content'>
+		<h1>不帕 - 面部诊断 <a href="../html/diagnose.html" style="font-size:x-small;margin-left:3rem;">返回首页</a></h1>
+		<p><small>点击"开始录像"按钮，面部朝向摄像头，然后缓缓做出微笑的表情。</small></p>
+		<p><small>点击"停止录像"按钮，可停止并预览已录制的视频。</small></p>
+		<p><small>点击"上传录像"按钮，可上传录制的视频（上传完后会需要约20s左右的转码，之后才能诊断）。</small></p>
+		<p><small>点击"开始诊断"按钮，可对刚刚上传的视频进行诊断（诊断需要约10s）。</small></p>
+		<div style="max-width: 28em;">
+			<div id="controls">
+				<button id="recordButton">开始录像</button>
+				<button id="stopButton" disabled>停止录像</button>
+			</div>
+
+			<video id="video" width="320" height="240" autoplay></video>
+
+
+
+			<a id="downloadVideoLink" style="display:none;" download="test.webm">下载视频</a>
+
+			<button id="uploadButton" style="display:none; width:100%; background-color: lightgreen;">
+				上传录像
+			</button>
+
+			<button id="diagnoseButton" style="display:none; width:100%; background-color: rgb(89, 129, 238);">
+				开始诊断
+			</button>
+
+			<button id="refreshButton" onclick="location.reload(true)"
+				style="display:none; background-color: lightgrey; margin-top: 0.5rem; width:100%;">
+				重新录制
+			</button>
+
+			<div id="fileId" style="display:none;"></div>
+
+			<pre id="log"></pre>
+
+			<div id="resultMessage" style="text-align: center;font-size: xx-large;margin-top:3rem;"></div>
+		</div>
+	</div>
+	<script src="app.js" type="module"></script>
+
+</body>
+
+</html>

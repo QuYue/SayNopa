@@ -1,0 +1,85 @@
+body {
+  background-color: #f5f6fa;
+}
+a:hover {
+  text-decoration: none;
+}
+#panel {
+  position: absolute;
+  display: flex;
+  width: 800px;
+  height: 350px;
+  left: 50%;
+  top: 50%;
+  margin-left: -400px;
+  margin-top: -220px;
+  border-radius: 1rem;
+  border: 1px solid rgba(228, 228, 228, 1);
+  box-shadow: 6px -6px rgba(228, 228, 228, 0.1);
+  overflow: hidden;
+}
+#panel .logo,
+#panel .log-in {
+  width: 400px;
+  height: 350px;
+}
+#panel .logo {
+  background-color: #2c3e50;
+}
+#panel .logo img {
+  display: inline-block;
+  padding: 30px 90px 0px 90px;
+}
+#panel .logo .des-one {
+  text-align: center;
+  font-size: 30px;
+  color: white;
+}
+#panel .logo .des-two {
+  padding: 20px;
+  text-align: center;
+  font-size: 50px;
+  color: white;
+}
+#panel .log-in {
+  /* background-color: aqua; */
+  padding: 20px;
+}
+
+#panel .log-in .title {
+  text-align: center;
+  font-weight: bold;
+}
+#panel .log-in .username,
+#panel .log-in .password {
+  margin-top: 30px;
+}
+
+/* 错误信息 */
+#panel .log-in .err-info {
+  position: absolute;
+  height: 20px;
+  display: none;
+  color: red;
+  margin-top: 10px;
+}
+#panel .log-in .err-info .sym {
+  font: 15px bold;
+}
+#panel .log-in .login-btn {
+  display: block;
+  width: 300px;
+  height: 50px;
+  border: none;
+  border-radius: 20px;
+  margin: 50px auto;
+  font-size: 20px;
+  color: white;
+  background-color: rgb(0, 205, 255);
+}
+#panel .log-in .other-operation {
+  font-size: 15px;
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+}

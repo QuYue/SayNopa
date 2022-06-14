@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+
+	<title>不帕 - 语音诊断</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename= 'css/record_audio.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename= 'css/common.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename= 'css/bootstrap.min.css') }}">
+	<script src="{{ url_for('static', filename= 'js/jquery.js') }}"></script>
+	<script src="{{ url_for('static', filename= 'js/bootstrap.min.js') }}"></script>
+</head>
+
+<body>
+	<!-- 头部内容 -->
+	<div id="page-header">
+		<h1>Welcome to <img src="{{ url_for('static', filename= 'img/login/logo.png') }}" width="100px" /></h1>
+	</div>
+
+	<!-- 导航条内容 -->
+
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="javascript:;">不帕诊断 </a></li>
+					<li><a href="{{ url_for('body_guide_page') }}">养生指南</a></li>
+					<li><a href="{{ url_for('handbook_page') }}">使用手册</a></li>
+					<li><a href="{{ url_for('about_us_page') }}">关于我们</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+							aria-expanded="false">用户 <b><em id="bp-user">未登录</em></b> <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="{{ url_for('change_username_page') }}">修改用户名</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="{{ url_for('change_password_page') }}">修改密码</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+    <center>
+	<div id="content">
+		<h1>不帕 - 语音诊断 <a href="{{ url_for('diagnose_page') }}" style="font-size:x-small;margin-left:3rem;">返回首页</a></h1>
+		<p><small>点击"开始录音"按钮，持续发出“啊”的声音，持续4秒以上。</small></p>
+		<p><small>录音将在10秒钟后自动完成，或可点击"停止录音"按钮。注意：录音时长太短可能会影响诊断效果。</small></p>
+		<p><small>录音完成后可预览已录制的声音。</small></p>
+		<p><small>点击"上传 & 诊断"按钮，可上传录制的音频并执行检测。</small></p>
+		<div style="max-width: 28em;">
+			<div id="controls">
+				<button id="recordButton">开始录音</button>
+				<button id="stopButton" disabled>停止录音</button>
+			</div>
+
+
+			<div>
+				<ol id="recordingsList"></ol>
+			</div>
+			<button id="uploadButton" style="display:none; width:100%; background-color: lightgreen;">
+				上传 & 诊断
+			</button>
+
+			<button id="refreshButton" onclick="location.reload(true)"
+				style="display:none; background-color: lightgrey; margin-top: 0.5rem; width:100%;">
+				重新录制
+			</button>
+
+			<div id="fileId" style="display:none;"></div>
+
+			<pre id="log"></pre>
+
+			<div id="resultMessage" style="text-align: center;font-size: xx-large;margin-top:3rem;"></div>
+		</div>
+	</div>
+	</center>
+	<script src="{{ url_for('static', filename= 'js/record_audio/WebAudioRecorder.min.js') }}"></script>
+	<script src="{{ url_for('static', filename= 'js/record_audio/app.js') }}" type="module"></script>
+
+</body>
+
+</html>

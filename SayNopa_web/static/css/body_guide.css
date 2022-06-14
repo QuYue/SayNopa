@@ -1,0 +1,47 @@
+#content {
+  box-sizing: content-box;
+  border-radius: 1rem;
+  width: 1200px;
+  height: 850px;
+  margin: 50px auto;
+  background-color: #f8f8f8;
+  border: 1px solid #e7e7e7;
+}
+#content .title {
+  padding: 20px 0;
+  font-weight: bold;
+  text-align: center;
+}
+#content .left,
+#content .right {
+  box-sizing: border-box;
+  float: left;
+  width: 600px;
+  height: 850px;
+  padding: 20px;
+  overflow: scroll;
+}
+
+#content .left::-webkit-scrollbar,
+#content .right::-webkit-scrollbar {
+  display: none;
+}
+
+#content .right {
+  border-left: 1px solid rgba(231, 231, 231, 1);
+}
+
+#content .left h1,
+#content .right h1 {
+  text-align: center;
+}
+#content .left p,
+#content .right p {
+  font-size: 16px;
+  line-height: 30px;
+  text-indent: 2rem;
+}
+#content .left h2,
+#content .right h2 {
+  font-size: 20px;
+}

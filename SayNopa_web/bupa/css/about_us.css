@@ -1,0 +1,17 @@
+#content {
+  border-radius: 1rem;
+  width: 1200px;
+  margin: 50px auto;
+  background-color: #f8f8f8;
+  border: 1px solid #e7e7e7;
+}
+#content .title {
+  padding: 20px 0;
+  font-weight: bold;
+  text-align: center;
+}
+#content .list li {
+  margin-top: 20px;
+  font-size: 20px;
+  line-height: 50px;
+}
